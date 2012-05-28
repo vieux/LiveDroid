@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" android:background="@drawable/whiten">
+
+    
+    <ImageView
+        android:id="@+id/imageViewDot"
+        android:layout_width="20dp"
+        android:src="@drawable/dot" android:layout_height="20dp" android:layout_centerInParent="true"/>
+<ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/xboxlogo" android:layout_marginTop="100dp" android:layout_centerInParent="true"/>
+
+<TextView
+    android:id="@+id/textViewLoading"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/imageViewLogo"
+    android:text="@string/loading"
+    android:textColor="@color/xbox_green" android:textStyle="italic" android:layout_centerHorizontal="true" android:layout_marginTop="17dp" android:background="@drawable/block" android:padding="4dp"/>
+
+<TextView
+    android:id="@+id/textViewTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="25dp"
+    android:text="@string/app_name"
+    android:textAppearance="?android:attr/textAppearanceLarge" android:textStyle="bold" android:textColor="@color/xbox_green" android:textSize="40sp" android:background="@drawable/block" android:paddingLeft="10dp" android:paddingRight="10dp" android:paddingBottom="4dp" android:paddingTop="4dp"/>
+    
+</RelativeLayout>

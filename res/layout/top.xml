@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="80dp" android:padding="5dp" android:background="#FFF">
+
+    <ImageView
+        android:id="@+id/imageViewProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" android:src="@drawable/avatarpic"/>
+
+    <TextView
+        android:id="@+id/textViewGamerTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageViewProfile"
+        android:layout_toRightOf="@+id/imageViewProfile"
+        android:textColor="@android:color/black" android:textSize="20sp" android:textStyle="bold" android:layout_marginLeft="5dp"/>
+
+    <TextView
+        android:id="@+id/textViewScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/gp" android:drawablePadding="4dp" android:textColor="@android:color/black" android:textSize="16sp" android:layout_alignParentRight="true" android:layout_alignParentBottom="true"/>
+
+    
+    <TextView
+        android:id="@+id/textViewGames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black" android:textSize="16sp" android:layout_alignParentRight="true" android:layout_above="@id/textViewScore" android:drawableLeft="@drawable/games" android:drawablePadding="4dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textViewScore"
+        android:background="@drawable/custom_spinner" android:entries="@array/types" android:visibility="visible" android:layout_marginRight="5dp" android:layout_marginLeft="5dp" android:layout_toRightOf="@id/imageViewProfile"/>
+
+</RelativeLayout>

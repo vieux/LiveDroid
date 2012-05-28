@@ -1,0 +1,13 @@
+<resources>
+	<style name="CustomProgressBarHorizontal" parent="android:Widget.ProgressBar.Horizontal">
+          <item name="android:progressDrawable">@drawable/custom_progress_bar_horizontal</item>
+	</style>
+	
+	<style name="CustomTheme" parent="@android:style/Theme.Light">
+   		<item name="android:windowBackground">@drawable/whiten</item>
+    	<item name="android:colorBackground">@drawable/whiten</item>
+	</style>
+	
+	<style name="CustomThemeNoBg" parent="@android:style/Theme.Light">
+	</style>
+</resources>

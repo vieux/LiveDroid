@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+    <fragment class="com.victorvieux.livedroid.fragments.ProfileFragment"
+            android:id="@+id/profile" android:layout_weight="1"
+            android:layout_width="0px"
+            android:layout_height="fill_parent" android:layout_marginRight="10dp" android:layout_marginBottom="10dp" android:layout_marginLeft="10dp" android:layout_marginTop="10dp"/>
+
+    <FrameLayout android:id="@+id/details" android:layout_weight="1"
+            android:layout_width="0px"
+            android:layout_height="fill_parent" android:layout_marginLeft="5dp" android:layout_marginBottom="10dp" android:layout_marginRight="10dp" android:layout_marginTop="10dp" android:visibility="gone"/>
+    
+</LinearLayout>

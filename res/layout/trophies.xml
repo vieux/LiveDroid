@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@drawable/block" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutCompleted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <RelativeLayout
+                android:id="@+id/RelativeLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textViewCompleted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/gold"
+                    android:gravity="center"
+                    android:text="@string/completed"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/textViewCompletedNb"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/xbox_green" android:textColor="@android:color/white" android:textSize="20dp" android:textStyle="bold" android:gravity="center"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/xbox_green" >
+            </View>
+
+            <com.devsmart.android.ui.HorizontalListView
+                android:id="@+id/horizontalListViewCompleted"
+                android:layout_width="match_parent"
+                android:layout_height="130dp" >
+            </com.devsmart.android.ui.HorizontalListView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/xbox_green" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutAlmostCompleted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+            
+            <RelativeLayout
+                android:id="@+id/RelativeLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                android:id="@+id/textViewAlmostCompleted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/silver"
+                android:gravity="center"
+                android:text="@string/almostcompleted"
+                android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/textViewAlmostCompletedNb"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/xbox_green" android:textColor="@android:color/white" android:textSize="20dp" android:textStyle="bold" android:gravity="center"/>
+
+            </RelativeLayout>
+
+            
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/xbox_green" >
+            </View>
+
+            <com.devsmart.android.ui.HorizontalListView
+                android:id="@+id/horizontalListViewAlmostCompleted"
+                android:layout_width="match_parent"
+                android:layout_height="130dp" >
+            </com.devsmart.android.ui.HorizontalListView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/xbox_green" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutMoreThan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <RelativeLayout
+                android:id="@+id/RelativeLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+               <TextView
+                android:id="@+id/textViewMoreThan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/bronze"
+                android:gravity="center"
+                android:text="@string/morethan"
+                android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/textViewMoreThanNb"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/xbox_green" android:textColor="@android:color/white" android:textSize="20dp" android:textStyle="bold" android:gravity="center"/>
+
+            </RelativeLayout>
+            
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/xbox_green" >
+            </View>
+
+            <com.devsmart.android.ui.HorizontalListView
+                android:id="@+id/horizontalListViewMoreThan"
+                android:layout_width="fill_parent"
+                android:layout_height="130dp" >
+            </com.devsmart.android.ui.HorizontalListView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/xbox_green" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

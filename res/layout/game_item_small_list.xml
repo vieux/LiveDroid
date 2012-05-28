@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<RelativeLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/imageViewBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" android:background="@drawable/box"/>
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageViewBox"
+        android:layout_toRightOf="@+id/imageViewBox"
+        android:textColor="@android:color/black" android:layout_marginLeft="5dp" android:textStyle="bold" android:lines="3"/>
+
+    <TextView
+        android:id="@+id/textViewScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/gp" android:drawablePadding="4dp" android:textColor="@android:color/black" android:layout_marginLeft="5dp" android:layout_toRightOf="@+id/imageViewBox" android:layout_below="@id/textViewTitle"/>
+
+     <TextView
+         android:id="@+id/textViewAch"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/textViewScore"
+         android:drawableLeft="@drawable/trophy"
+         android:drawablePadding="4dp"
+         android:textColor="@android:color/black" android:layout_toRightOf="@+id/imageViewBox" android:layout_marginLeft="5dp"/>
+
+     <ProgressBar
+         android:id="@+id/progressBar"
+         style="@style/CustomProgressBarHorizontal"
+         android:layout_width="160dp"
+         android:layout_height="wrap_content"
+         android:layout_toRightOf="@+id/imageViewBox" android:layout_marginBottom="5dp" android:layout_marginLeft="5dp" android:layout_alignBottom="@id/imageViewBox"/>
+    
+</RelativeLayout>
+</LinearLayout>

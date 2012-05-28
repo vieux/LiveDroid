@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" android:padding="5dp" android:background="@drawable/block">
+
+    <ImageView
+        android:id="@+id/imageViewTile"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/ach"/>
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageViewTile"
+        android:layout_toLeftOf="@+id/textViewScore"
+        android:layout_toRightOf="@+id/imageViewTile"
+        android:textColor="@android:color/black" android:layout_marginLeft="5dp" android:lines="2" android:textStyle="bold"/>
+
+     <TextView
+        android:id="@+id/textViewDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewTitle"
+        android:layout_toLeftOf="@+id/textViewScore"
+        android:layout_toRightOf="@+id/imageViewTile"
+        android:textColor="@android:color/black" android:layout_marginLeft="5dp" android:lines="5"/>
+     
+    <TextView
+        android:id="@+id/textViewScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:drawableLeft="@drawable/gp" android:drawablePadding="4dp" android:textColor="@android:color/black" android:layout_marginLeft="5dp"/>
+
+    <ImageView
+        android:id="@+id/imageViewVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/video" />
+    
+</RelativeLayout>
