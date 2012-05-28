@@ -12,15 +12,15 @@ FEATURES
 DONE
 ----
 
-Display all your games (Xbox Retails, Xbox Arcade and Windows games)
-Link to an achivements guide from x360a.com if available.
-Easily search for a particular achivement on YouTube. 
-Set your avator as your phone background
++   Display all your games (Xbox Retails, Xbox Arcade and Windows games)
++   Link to an achivements guide from x360a.com if available.
++   Easily search for a particular achivement on YouTube. 
++   Set your avator as your phone background
 
 TODO
 ----
 
-Friends
++   Friends
 
 SCREENSHOTS
 ===========
@@ -37,6 +37,6 @@ SCREENSHOTS
 DEPENDENCIES
 ============
 
-[android-query](http://code.google.com/p/android-query/)
-[ignition](https://github.com/kaeppler/ignition)
-[android compatibility lib](http://developer.android.com/sdk/compatibility-library.html)
++   [android-query](http://code.google.com/p/android-query/)
++   [ignition](https://github.com/kaeppler/ignition)
++   [android compatibility lib](http://developer.android.com/sdk/compatibility-library.html)
