@@ -3,12 +3,10 @@ package com.victorvieux.livedroid.activities;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -21,8 +19,7 @@ import com.victorvieux.livedroid.data.Game;
 import com.victorvieux.livedroid.data.Player;
 import com.victorvieux.livedroid.tools.API_GAMES.GAME_TYPE;
 
-public class TrophiesActivity extends Activity implements OnItemClickListener {
-    public Player mPlayer;
+public class TrophiesActivity extends BaseActivty implements OnItemClickListener {
     private List<Game> completed;
 	private List<Game> almostCompleted;
 	private List<Game> moreThan;
@@ -30,14 +27,14 @@ public class TrophiesActivity extends Activity implements OnItemClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPlayer = (Player) getIntent().getExtras().getSerializable("player");
+        setPlayer((Player) getIntent().getExtras().getSerializable("player"));
         setContentView(R.layout.trophies);
         
         completed = new ArrayList<Game>();
         almostCompleted = new ArrayList<Game>();
         moreThan = new ArrayList<Game>();
         
-        for (Game g : mPlayer.games) {
+        for (Game g : getPlayer().games) {
 			int progress = g.Progress_Score * 100 / g.PossibleScore;
 			if (progress == 100)
 				completed.add(g);
@@ -75,38 +72,6 @@ public class TrophiesActivity extends Activity implements OnItemClickListener {
         return true;
     }
     
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-		    case R.id.wall: 
-		    {
-		        Intent intent = new Intent(this, WallActivity.class);
-		        intent.putExtra("player", mPlayer);
-		        startActivity(intent);
-		        return true;
-		    }
-		    case R.id.list:
-            {
-            	Intent intent = new Intent(this, ListActivity.class);
-                intent.putExtra("player", mPlayer);
-        		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        		intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		        startActivity(intent);
-                return true;
-            }
-            case R.id.avatar:
-            	Intent intent = new Intent(this, AvatarActivity.class);
-                intent.putExtra("player", mPlayer);
-                startActivity(intent);
-                return true;
-            case R.id.settings:
-            	startActivity(new Intent(this, SettingsActivity.class));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long arg3) {
 		 Intent intent = new Intent();

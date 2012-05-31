@@ -18,8 +18,8 @@ import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.victorvieux.livedroid.R;
+import com.victorvieux.livedroid.activities.BaseActivty;
 import com.victorvieux.livedroid.activities.GameActivity;
-import com.victorvieux.livedroid.activities.ListActivity;
 import com.victorvieux.livedroid.adapters.GameListAdapter;
 import com.victorvieux.livedroid.data.Game;
 import com.victorvieux.livedroid.data.Player;
@@ -42,7 +42,7 @@ public class ProfileFragment extends ListFragment implements OnItemSelectedListe
     public void onActivityCreated(Bundle savedState) {
         super.onActivityCreated(savedState);
         
-        mPlayer = ((ListActivity)  getActivity()).mPlayer;
+        mPlayer = ((BaseActivty)  getActivity()).getPlayer();
         if (mPlayer != null) {
         	SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         	Editor e = sp.edit();

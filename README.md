@@ -13,9 +13,9 @@ DONE
 ----
 
 +   Display all your games (Xbox Retails, Xbox Arcade and Windows games)
-+   Link to an achivements guide from x360a.com if available.
++   Link to an achivements guide from [x360a.com](x360a.com] if available.
 +   Easily search for a particular achivement on YouTube. 
-+   Set your avator as your phone background
++   Set your avatar as your phone background
 
 TODO
 ----

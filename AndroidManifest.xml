@@ -13,6 +13,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" 
         android:theme="@style/CustomTheme"
+        android:name=".LiveDroidApp"
         android:hardwareAccelerated="true" >
         <activity
             android:noHistory="true"
@@ -25,12 +26,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:label="@string/List" android:name="com.victorvieux.livedroid.activities.ListActivity"></activity>
-        <activity android:label="@string/wall" android:name="com.victorvieux.livedroid.activities.WallActivity"></activity>
-        <activity android:label="@string/game" android:name="com.victorvieux.livedroid.activities.GameActivity"></activity>
-        <activity android:label="@string/Avatar" android:name="com.victorvieux.livedroid.activities.AvatarActivity"></activity>
-        <activity android:label="@string/Trophies" android:name="com.victorvieux.livedroid.activities.TrophiesActivity"></activity>
-        <activity android:label="@string/settings" android:name=".activities.SettingsActivity" android:theme="@style/CustomThemeNoBg"></activity>
+        <activity android:label="" android:name=".activities.ListActivity"></activity>
+        <activity android:label="" android:name=".activities.WallActivity"></activity>
+        <activity android:label="" android:name=".activities.GameActivity"></activity>
+        <activity android:label="" android:name=".activities.AvatarActivity"></activity>
+        <activity android:label="" android:name=".activities.TrophiesActivity"></activity>
+        <activity android:label="" android:name=".activities.SettingsActivity" android:theme="@style/CustomThemeNoBg"></activity>
+        <activity android:label="" android:name=".activities.CarouselActivity"></activity>
         
         </application>
 
