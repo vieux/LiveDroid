@@ -3,11 +3,11 @@
           <item name="android:progressDrawable">@drawable/custom_progress_bar_horizontal</item>
 	</style>
 	
-	<style name="CustomTheme" parent="@android:style/Theme.Light">
+	<style name="CustomTheme" parent="@style/Theme.Sherlock.Light">
    		<item name="android:windowBackground">@drawable/whiten</item>
     	<item name="android:colorBackground">@drawable/whiten</item>
 	</style>
 	
-	<style name="CustomThemeNoBg" parent="@android:style/Theme.Light">
+	<style name="CustomThemeNoBg" parent="@style/Theme.Sherlock.Light">
 	</style>
 </resources>

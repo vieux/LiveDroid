@@ -43,4 +43,4 @@ DEPENDENCIES
 
 +   [android-query](http://code.google.com/p/android-query/)
 +   [ignition](https://github.com/kaeppler/ignition)
-+   [android compatibility lib](http://developer.android.com/sdk/compatibility-library.html)
++   [actionbarsherlock](http://actionbarsherlock.com/)

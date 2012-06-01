@@ -28,9 +28,9 @@ import android.graphics.Paint.Align;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import com.android.ex.carousel.CarouselView;
 import com.android.ex.carousel.CarouselViewHelper;
 import com.androidquery.AQuery;
@@ -54,7 +54,7 @@ public class CarouselActivity extends BaseActivty {
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
+        MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.menu_carousel, menu);
         return true;
     } 
@@ -76,6 +76,7 @@ public class CarouselActivity extends BaseActivty {
              intent.setClass(CarouselActivity.this, GameActivity.class);
              intent.putExtra("index", id);
              intent.putExtra("forced", true);
+             intent.putExtra("box", getPlayer().games.get(id).BoxArt_Small);
              intent.putExtra("url", getPlayer().games.get(id).AchievementInfo);
              intent.putExtra("title", getPlayer().games.get(id).Name);
              startActivity(intent);	

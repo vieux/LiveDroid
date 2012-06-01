@@ -1,9 +1,9 @@
 package com.victorvieux.livedroid.activities;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import com.victorvieux.livedroid.R;
 import com.victorvieux.livedroid.data.Player;
 
@@ -18,7 +18,7 @@ public class ListActivity extends BaseActivty {
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
+        MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.menu_list, menu);
         return true;
     }

@@ -1,13 +1,13 @@
 package com.victorvieux.livedroid.activities;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
-import android.view.MenuItem;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.victorvieux.livedroid.R;
 import com.victorvieux.livedroid.data.Player;
 
-public abstract class BaseActivty extends FragmentActivity{
+public abstract class BaseActivty extends SherlockFragmentActivity{
     private Player mPlayer;
 
 	@Override
