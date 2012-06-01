@@ -27,12 +27,12 @@
             </intent-filter>
         </activity>
         <activity android:label="" android:name=".activities.ListActivity"></activity>
-        <activity android:label="" android:name=".activities.WallActivity"></activity>
-        <activity android:label="" android:name=".activities.GameActivity"></activity>
+        <activity android:noHistory="true" android:label="" android:name=".activities.WallActivity"></activity>
+        <activity android:noHistory="true" android:label="" android:name=".activities.GameActivity"></activity>
         <activity android:label="" android:name=".activities.AvatarActivity"></activity>
-        <activity android:label="" android:name=".activities.TrophiesActivity"></activity>
-        <activity android:label="" android:name=".activities.SettingsActivity" android:theme="@style/CustomThemeNoBg"></activity>
-        <activity android:label="" android:name=".activities.CarouselActivity"></activity>
+        <activity android:noHistory="true" android:label="" android:name=".activities.TrophiesActivity"></activity>
+        <activity android:noHistory="true" android:label="" android:name=".activities.SettingsActivity" android:theme="@style/CustomThemeNoBg"></activity>
+        <activity android:noHistory="true" android:label="" android:name=".activities.CarouselActivity"></activity>
         
         </application>
 

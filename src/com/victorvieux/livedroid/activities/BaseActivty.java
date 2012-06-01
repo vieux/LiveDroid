@@ -20,6 +20,13 @@ public abstract class BaseActivty extends FragmentActivity{
                 startActivity(intent);
                 return true;
             }
+            case R.id.list: 
+            {
+                Intent intent = new Intent(this, ListActivity.class);
+                intent.putExtra("player", getPlayer());
+                startActivity(intent);
+                return true;
+            }
             case R.id.trophies: 
             {
                 Intent intent = new Intent(this, TrophiesActivity.class);
