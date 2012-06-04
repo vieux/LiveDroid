@@ -30,7 +30,7 @@
         android:text="@string/Guide"
         android:textColor="@color/x360a_green"
         android:textSize="25dp"
-        android:textStyle="bold" android:padding="5dp" android:layout_marginRight="5dp" android:layout_marginBottom="5dp"/>
+        android:textStyle="bold" android:padding="5dp" android:layout_marginRight="5dp" android:layout_marginBottom="5dp" android:visibility="invisible"/>
 
     <View
         android:layout_width="fill_parent"

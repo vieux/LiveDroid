@@ -6,9 +6,9 @@
     <string name="Avatar">Avatar</string>
     <string name="carousel">Carrousel</string>
     <string name="Trophies">Trophées</string>
-    <string name="wallpaper">Mettre en fond d'écran</string>
+    <string name="wallpaper">Mettre en fond d\'écran</string>
     <string name="loading">chargement...</string>
-    <string name="enter">Merci d'entrer votre GamerTag</string>
+    <string name="enter">Merci d\'entrer votre GamerTag</string>
     <string name="gamertag">GamerTag</string>
     <string name="settings">Paramètres</string>
     <string name="connection">Connection</string>
