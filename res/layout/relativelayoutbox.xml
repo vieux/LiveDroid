@@ -4,22 +4,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/block"
-    android:padding="40dp"
+    android:padding="20dp"
     >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Loading..."
-        android:textColor="@android:color/black"
-        android:textSize="30dp"
-        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imageViewBoxBig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true" android:background="@drawable/loading_placeholder"/>
 
 </RelativeLayout>

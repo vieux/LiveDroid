@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name">LiveDroid</string>
+    
     <string name="wall">Wall</string>
     <string name="List">List</string>
     <string name="Avatar">Avatar</string>
-    <string name="game">Game</string>
     <string name="carousel">Carousel</string>
     <string name="Trophies">Trophies</string>
     <string name="wallpaper">Set as wallpaper</string>
@@ -12,20 +13,18 @@
     <string name="enter">Please enter your GamerTag</string>
     <string name="gamertag">GamerTag</string>
     <string name="settings">Settings</string>
-    
-    <string name="app_name">LiveDroid</string>
-    
     <string name="connection">Connection</string>
 	<string name="license">License</string>
-    
 	<string name="completed">Completed</string>  
 	<string name="almostcompleted">Almost Completed</string>  
 	<string name="morethan">More than 75%</string>  
-		
-    <string-array name="types">
+	<string name="xboxapititle">This app uses http://xboxapi.com/</string>
+	<string name="xboxapisubtitle">Thanks to @djekl</string>
+	<string name="fork">Fork me on Github</string>
+	<string name="Guide">Guide</string>
+		<string-array name="types">
         <item>All</item>
         <item>Retails</item>
         <item>Arcade</item>
     </string-array>
-    
 </resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>    
+
+    <string name="wall">Mur</string>
+    <string name="List">Liste</string>
+    <string name="Avatar">Avatar</string>
+    <string name="carousel">Carrousel</string>
+    <string name="Trophies">Trophées</string>
+    <string name="wallpaper">Mettre en fond d'écran</string>
+    <string name="loading">chargement...</string>
+    <string name="enter">Merci d'entrer votre GamerTag</string>
+    <string name="gamertag">GamerTag</string>
+    <string name="settings">Paramètres</string>
+    <string name="connection">Connection</string>
+	<string name="license">Licence</string>
+	<string name="completed">Terminés</string>  
+	<string name="almostcompleted">Presque terminés</string>  
+	<string name="morethan">Plus de 75%</string>  
+	<string name="xboxapititle">Cette app utilise http://xboxapi.com/</string>
+	<string name="xboxapisubtitle">Merci à @djekl</string>
+	<string name="fork">Fork me on Github</string>
+	<string name="Guide">Guide</string>
+		<string-array name="types">
+        <item>Tous</item>
+        <item>Retails</item>
+        <item>Arcade</item>
+    </string-array>
+</resources>

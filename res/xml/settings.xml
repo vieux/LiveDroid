@@ -2,9 +2,8 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     <EditTextPreference android:title="@string/gamertag" android:key="gamertag" android:dialogMessage="@string/enter" android:icon="@drawable/controller"/>
     <Preference android:key="license" android:title="@string/license" android:icon="@drawable/notepad"/>
-    <Preference android:icon="@drawable/beaker" android:summary="Thanks, @djekl 
-" android:title="This app uses http://xboxapi.com/" android:key="xboxapi"/>
-    <Preference android:icon="@drawable/wrench" android:title="Fork me on Github" android:key="github"/>
+    <Preference android:icon="@drawable/beaker" android:summary="@string/xboxapisubtitle" android:title="@string/xboxapititle" android:key="xboxapi"/>
+    <Preference android:icon="@drawable/wrench" android:title="@string/fork" android:key="github"/>
     
 
 </PreferenceScreen>
