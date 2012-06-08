@@ -17,6 +17,7 @@ import android.preference.PreferenceActivity;
 import com.victorvieux.livedroid.R;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceClickListener {
+	@SuppressWarnings("deprecation")
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
