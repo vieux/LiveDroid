@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:drawableLeft="@drawable/gp" android:drawablePadding="4dp" android:textColor="@android:color/black" android:layout_marginLeft="5dp"/>
+        android:drawableLeft="@drawable/icon_gp" android:drawablePadding="4dp" android:textColor="@android:color/black" android:layout_marginLeft="5dp"/>
 
     <ImageView
         android:id="@+id/imageViewVideo"

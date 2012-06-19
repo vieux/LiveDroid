@@ -25,14 +25,14 @@ android:layout_width="wrap_content"
         android:id="@+id/textViewScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/gp" android:drawablePadding="4dp" android:textColor="@android:color/black" android:layout_marginLeft="5dp" android:layout_toRightOf="@+id/imageViewBox" android:layout_below="@id/textViewTitle"/>
+        android:drawableLeft="@drawable/icon_gp" android:drawablePadding="4dp" android:textColor="@android:color/black" android:layout_marginLeft="5dp" android:layout_toRightOf="@+id/imageViewBox" android:layout_below="@id/textViewTitle"/>
 
      <TextView
          android:id="@+id/textViewAch"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_below="@+id/textViewScore"
-         android:drawableLeft="@drawable/trophy"
+         android:drawableLeft="@drawable/icon_trophy"
          android:drawablePadding="4dp"
          android:textColor="@android:color/black" android:layout_toRightOf="@+id/imageViewBox" android:layout_marginLeft="5dp"/>
 

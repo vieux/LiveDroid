@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.github.ignition.core.tasks.IgnitedAsyncTask;
@@ -53,6 +52,7 @@ public class SplashActivity extends Activity {
 
         String gamertag = PreferenceManager.getDefaultSharedPreferences(this).getString("gamertag", null);
         if (gamertag != null && gamertag.compareTo("") != 0) {
+        	((EditText) findViewById(R.id.editTextGamerTag)).setText(gamertag);
         	HttpTask task = new HttpTask(http, gamertag);
         	task.connect(this);
         	task.execute();
@@ -98,9 +98,7 @@ public class SplashActivity extends Activity {
 		@Override
 		public boolean onTaskFailed(SplashActivity context, Exception error) {
 		    super.onTaskFailed(context, error); // prints a stack trace
-				
-		    Toast.makeText(context, "error", Toast.LENGTH_LONG).show();
-        	((ViewSwitcher)context.findViewById(R.id.viewSwitcherLogin)).showPrevious();
+		    ((ViewSwitcher)context.findViewById(R.id.viewSwitcherLogin)).showPrevious();
 		    return true;
 		}
 		

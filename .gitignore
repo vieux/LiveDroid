@@ -5,3 +5,4 @@ project.properties
 gen/*
 *~
 libs/*
+dist/*
