@@ -21,7 +21,7 @@ public class WallActivity extends BaseActivty implements OnItemClickListener {
         super.onCreate(savedInstanceState);
         setPlayer((Player) getIntent().getExtras().getSerializable("player"));
         setContentView(R.layout.wall);
-        
+        ((GridView) findViewById(R.id.gridView)).setEmptyView(findViewById(android.R.id.empty));
         ((GridView) findViewById(R.id.gridView)).setAdapter(new GameGridAdapter(this, getPlayer().games));
         ((GridView) findViewById(R.id.gridView)).setOnItemClickListener(this);
     }

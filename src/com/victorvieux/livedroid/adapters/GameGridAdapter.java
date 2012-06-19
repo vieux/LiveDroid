@@ -31,7 +31,7 @@ public class GameGridAdapter extends BaseAdapter{
 
 	@Override
 	public int getCount() {
-		return mGames.size();
+		return mGames == null ? 0 : mGames.size();
 	}
 
 	@Override

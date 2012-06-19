@@ -51,9 +51,9 @@ public class SplashActivity extends Activity {
         http.setHttpClient(SSL.getNewHttpClient());
 
         String gamertag = PreferenceManager.getDefaultSharedPreferences(this).getString("gamertag", null);
-        if (gamertag != null && gamertag.compareTo("") != 0) {
-        	((EditText) findViewById(R.id.editTextGamerTag)).setText(gamertag);
-        	HttpTask task = new HttpTask(http, gamertag);
+        if (gamertag != null && gamertag.trim().compareTo("") != 0) {
+        	((EditText) findViewById(R.id.editTextGamerTag)).setText(gamertag.trim());
+        	HttpTask task = new HttpTask(http, gamertag.trim());
         	task.connect(this);
         	task.execute();
         } else {

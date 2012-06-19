@@ -14,4 +14,9 @@
         android:layout_below="@+id/sep" android:cacheColorHint="@android:color/white" android:dividerHeight="2dp" android:divider="@color/xbox_green">
     </ListView>
 
+	<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" android:layout_centerHorizontal="true" android:layout_centerInParent="true" android:text="@string/no_games" android:textColor="@color/xbox_green" android:textStyle="bold" android:textSize="20dp" android:visibility="gone" android:id="@android:id/empty">
+
+</TextView>
    </RelativeLayout>

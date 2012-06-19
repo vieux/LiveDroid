@@ -35,6 +35,7 @@ public class GameListAdapter extends BaseAdapter {
 	
 	public void filter(GAME_TYPE type) {
 		mFilteredGames.clear();
+		if (mGames != null) {
 		for (Game g : mGames)
 			switch (type) {
 			case ARCADE:
@@ -48,6 +49,7 @@ public class GameListAdapter extends BaseAdapter {
 			default:
 				mFilteredGames.add(g);
 				break;
+		}
 		}
 		notifyDataSetChanged();
 	}

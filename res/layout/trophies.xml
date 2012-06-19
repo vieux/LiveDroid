@@ -155,6 +155,12 @@
                 android:layout_height="1dp"
                 android:background="@color/xbox_green" />
         </LinearLayout>
+        <TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="fill_parent" android:text="@string/no_games" android:textColor="@color/xbox_green" android:textStyle="bold" android:textSize="20dp" android:visibility="gone" android:id="@android:id/empty" android:layout_gravity="center">
+
+</TextView>
     </LinearLayout>
 
+    
 </ScrollView>

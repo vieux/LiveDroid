@@ -156,7 +156,7 @@ public class CarouselActivity extends BaseActivty {
         mHelper = new LocalCarouselViewHelper(this);
         mHelper.setCarouselView(mView);
         mView.setSlotCount(CARD_SLOTS);
-        mView.createCards(INCREMENTAL_ADD ? 1: getPlayer().games.size());
+        mView.createCards(getPlayer().games == null ? 0 : (INCREMENTAL_ADD ? 1: getPlayer().games.size()));
         mView.setVisibleSlots(SLOTS_VISIBLE);
         mView.setStartAngle((float) -(2.0f*Math.PI * 5 / CARD_SLOTS));
         mBorder = BitmapFactory.decodeResource(res, R.drawable.border);
@@ -167,7 +167,7 @@ public class CarouselActivity extends BaseActivty {
         mView.setFadeInDuration(250);
         mView.setVisibleDetails(VISIBLE_DETAIL_COUNT);
         mView.setDragModel(CarouselView.DRAG_MODEL_PLANE);
-        if (INCREMENTAL_ADD) {
+        if (getPlayer().games != null && INCREMENTAL_ADD) {
             mView.postDelayed(mAddCardRunnable, 2000);
         }
     }

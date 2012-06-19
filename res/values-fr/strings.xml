@@ -25,4 +25,6 @@
         <item>Retails</item>
         <item>Arcade</item>
     </string-array>
+    <string name="no_games">Aucun jeu</string>
+		
 </resources>

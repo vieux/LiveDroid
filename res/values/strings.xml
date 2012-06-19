@@ -28,4 +28,5 @@
         <item>Arcade</item>
     </string-array>
         <string name="login">login</string>
+        <string name="no_games">No games</string>
 </resources>

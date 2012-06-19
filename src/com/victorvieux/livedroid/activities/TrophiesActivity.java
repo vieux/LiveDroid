@@ -33,16 +33,18 @@ public class TrophiesActivity extends BaseActivty implements OnItemClickListener
         completed = new ArrayList<Game>();
         almostCompleted = new ArrayList<Game>();
         moreThan = new ArrayList<Game>();
-        
-        for (Game g : getPlayer().games) {
-			int progress = g.Progress_Score * 100 / g.PossibleScore;
-			if (progress == 100)
-				completed.add(g);
-			else if (progress >= 90)
-				almostCompleted.add(g);
-			else if (progress >= 75)
-				moreThan.add(g);
-		}
+        if (getPlayer().games != null) {
+	        for (Game g : getPlayer().games) {
+				int progress = g.Progress_Score * 100 / g.PossibleScore;
+				if (progress == 100)
+					completed.add(g);
+				else if (progress >= 90)
+					almostCompleted.add(g);
+				else if (progress >= 75)
+					moreThan.add(g);
+			}
+        } else
+        	findViewById(android.R.id.empty).setVisibility(View.VISIBLE);
         
         if (completed.size() > 0) {
         	findViewById(R.id.LinearLayoutCompleted).setVisibility(View.VISIBLE);

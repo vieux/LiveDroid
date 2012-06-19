@@ -53,7 +53,7 @@ public class ProfileFragment extends ListFragment implements OnItemSelectedListe
         	aq.id(R.id.imageViewProfile).image(mPlayer.Avatar_Gamertile);
 	        ((TextView) getView().findViewById(R.id.textViewGamerTag)).setText(mPlayer.Gamertag);
 	        ((TextView) getView().findViewById(R.id.textViewScore)).setText(mPlayer.Gamerscore);
-	        ((TextView) getView().findViewById(R.id.textViewGames)).setText(""+ mPlayer.games.size());
+	        ((TextView) getView().findViewById(R.id.textViewGames)).setText(""+ (mPlayer.games == null ? "0" : mPlayer.games.size()));
 	        mAdapter = new GameListAdapter(getActivity(), mPlayer.games, GAME_TYPE.ALL, false);
 	        setListAdapter(mAdapter);
 	        ((Spinner) getView().findViewById(R.id.spinnerType)).setOnItemSelectedListener(this);
