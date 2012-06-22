@@ -87,6 +87,8 @@ public class ProfileFragment extends ListFragment implements OnItemSelectedListe
     }
 
    void showDetails(int index) {
+	   if (index < mAdapter.getCount())
+		   return;
         mCurCheckPosition = index;
     	Game g = mAdapter.getItem(index);
 

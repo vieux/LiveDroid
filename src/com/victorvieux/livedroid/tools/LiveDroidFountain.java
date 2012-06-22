@@ -1,5 +1,6 @@
 package com.victorvieux.livedroid.tools;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -20,6 +21,7 @@ public class LiveDroidFountain
 {
 	private Activity mActivity;
 	private Drawable[] mDrawables;
+	private List<ImageView> mImages = new ArrayList<ImageView>();
 	
 	public LiveDroidFountain(Activity activity)
 	{
@@ -54,6 +56,14 @@ public class LiveDroidFountain
 	    paramImageView.startAnimation(localAnimationSet);
 	}
 	
+	public void stop() {
+	    RelativeLayout localRelativeLayout = (RelativeLayout)mActivity.findViewById(R.id.Fountain);
+	    for (ImageView imageView : mImages) {
+	    	imageView.setAnimation(null);
+	    	localRelativeLayout.removeView(imageView);
+	    }
+	}
+	
 	public void animate(boolean infinite)
 	  {
 	    ImageView localImageView1 = (ImageView)mActivity.findViewById(R.id.imageViewFountain); 
@@ -74,8 +84,10 @@ public class LiveDroidFountain
 	      }
 	      localImageView2.setImageDrawable(mDrawables[i]);
 	      localImageView2.setLayoutParams(localImageView1.getLayoutParams());
-	      if (j != 0)
+	      if (j != 0) {
 	        localRelativeLayout.addView(localImageView2, 0);
+	        mImages.add(localImageView2);
+	      }
 	      animate(localImageView2, infinite);
 	    }
 	  }

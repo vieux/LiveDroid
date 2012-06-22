@@ -56,8 +56,8 @@ public class SplashActivity extends Activity {
         	HttpTask task = new HttpTask(http, gamertag.trim());
         	task.connect(this);
         	task.execute();
-        } else {
-        	findViewById(R.id.buttonLogin).setOnClickListener(new OnClickListener() {
+        }
+        findViewById(R.id.buttonLogin).setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
@@ -69,7 +69,7 @@ public class SplashActivity extends Activity {
 					}
 				}
 			});
-        }
+        
     }
     
     public static final class HttpTask extends IgnitedAsyncTask<SplashActivity, Void, Void, IgnitedHttpResponse> {
@@ -98,6 +98,7 @@ public class SplashActivity extends Activity {
 		@Override
 		public boolean onTaskFailed(SplashActivity context, Exception error) {
 		    super.onTaskFailed(context, error); // prints a stack trace
+		    context.mLiveDroidFountain.stop();
 		    ((ViewSwitcher)context.findViewById(R.id.viewSwitcherLogin)).showPrevious();
 		    return true;
 		}
@@ -119,7 +120,7 @@ public class SplashActivity extends Activity {
 			} catch (Exception e) {
 	        	((ViewSwitcher)context.findViewById(R.id.viewSwitcherLogin)).showPrevious();
 			}
-		
+		    context.mLiveDroidFountain.stop();
 		    return true;
 		}
 	}
