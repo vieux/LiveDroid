@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/x360a"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" android:background="@android:color/white">
+    android:layout_height="wrap_content" >
+
  <ImageView
         android:id="@+id/MainImageViewBox"
         android:layout_width="wrap_content"
@@ -17,13 +18,20 @@
         android:layout_toRightOf="@+id/MainImageViewBox"
         android:textColor="@android:color/black" android:layout_marginLeft="5dp" android:textStyle="bold" android:textSize="20dp"/>
 
+ <Spinner
+        android:id="@+id/spinnerType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/sep"
+        android:background="@drawable/custom_spinner" android:entries="@array/typesach" android:visibility="gone" android:layout_marginRight="5dp" android:layout_marginBottom="5dp" android:layout_toRightOf="@id/MainImageViewBox"/>
+ 
     <TextView
         android:id="@+id/ButtonGuide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/sep"
         android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/MainImageViewBox"
+        android:layout_toRightOf="@+id/spinnerType"
         android:background="@drawable/block_x360a"
         android:drawableLeft="@drawable/x360alogosmall"
         android:gravity="center"

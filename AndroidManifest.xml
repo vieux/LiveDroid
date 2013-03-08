@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.victorvieux.livedroid"
-    android:versionCode="111"
-    android:versionName="1.1.1" >
+    android:versionCode="200"
+    android:versionName="2.0" >
 
-    <uses-sdk android:minSdkVersion="5" android:targetSdkVersion="15"/>
+    <uses-sdk android:minSdkVersion="5" android:targetSdkVersion="17"/>
 	<uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" 
-        android:theme="@style/CustomTheme"
+        android:theme="@style/Theme.xbox_theme"
         android:name=".LiveDroidApp"
         android:hardwareAccelerated="true" >
         <activity
@@ -26,13 +25,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.MainActivity"></activity>
         <activity android:label="" android:name=".activities.ListActivity"></activity>
         <activity android:noHistory="true" android:label="" android:name=".activities.WallActivity"></activity>
         <activity android:noHistory="true" android:label="" android:name=".activities.GameActivity"></activity>
         <activity android:label="" android:name=".activities.AvatarActivity"></activity>
         <activity android:noHistory="true" android:label="" android:name=".activities.TrophiesActivity"></activity>
-        <activity android:noHistory="true" android:label="" android:name=".activities.SettingsActivity" android:theme="@style/CustomThemeNoBg"></activity>
-        <activity android:noHistory="true" android:label="" android:name=".activities.CarouselActivity"></activity>
+        <activity android:noHistory="true" android:label="@string/settings" android:name=".activities.SettingsActivity" android:theme="@style/CustomThemeNoBg"></activity>
+        <activity android:noHistory="true" android:label="@string/carousel" android:name=".activities.CarouselActivity"></activity>
         
         </application>
 

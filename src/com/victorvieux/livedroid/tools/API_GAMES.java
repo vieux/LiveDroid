@@ -16,6 +16,10 @@ public class API_GAMES extends JSONObject {
 	public API_GAMES(String str) throws JSONException {
 		super(str);
 	}
+	
+	public String getApiLimit(){
+		return optString("API_Limit", "");
+	}
 
 	public Player getPlayer() {
 		JSONObject jplayer = optJSONObject("Player");

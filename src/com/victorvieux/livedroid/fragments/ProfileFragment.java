@@ -12,49 +12,49 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.victorvieux.livedroid.R;
-import com.victorvieux.livedroid.activities.BaseActivty;
 import com.victorvieux.livedroid.activities.GameActivity;
+import com.victorvieux.livedroid.activities.MainActivity;
 import com.victorvieux.livedroid.adapters.GameListAdapter;
 import com.victorvieux.livedroid.data.Game;
 import com.victorvieux.livedroid.data.Player;
 import com.victorvieux.livedroid.tools.API_GAMES.GAME_TYPE;
 
-public class ProfileFragment extends ListFragment implements OnItemSelectedListener {
+public class ProfileFragment extends ListFragment implements OnItemSelectedListener, OnTapListener{
     boolean mDualPane;
     int mCurCheckPosition = 0;
-    Player mPlayer;
     GameListAdapter mAdapter;
     
     @Override
     public View onCreateView(LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
       
-        return inflater.inflate(R.layout.profile, container);
+        return inflater.inflate(R.layout.profile, container, false);
     }
     
     @Override
     public void onActivityCreated(Bundle savedState) {
         super.onActivityCreated(savedState);
         
-        mPlayer = ((BaseActivty)  getActivity()).getPlayer();
-        if (mPlayer != null) {
+        Player p = ((MainActivity)  getActivity()).getPlayer();
+        if (p != null) {
         	SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         	Editor e = sp.edit();
-        	e.putString("gamertag", mPlayer.Gamertag);
+        	e.putString("gamertag", p.Gamertag);
         	e.commit();
         	
         	AQuery aq = new AQuery(getActivity());
-        	aq.id(R.id.imageViewProfile).image(mPlayer.Avatar_Gamertile);
-	        ((TextView) getView().findViewById(R.id.textViewGamerTag)).setText(mPlayer.Gamertag);
-	        ((TextView) getView().findViewById(R.id.textViewScore)).setText(mPlayer.Gamerscore);
-	        ((TextView) getView().findViewById(R.id.textViewGames)).setText(""+ (mPlayer.games == null ? "0" : mPlayer.games.size()));
-	        mAdapter = new GameListAdapter(getActivity(), mPlayer.games, GAME_TYPE.ALL, false);
+        	aq.id(R.id.imageViewProfile).image(p.Avatar_Gamertile);
+	        ((TextView) getView().findViewById(R.id.textViewGamerTag)).setText(p.Gamertag);
+	        ((TextView) getView().findViewById(R.id.textViewScore)).setText(p.Gamerscore);
+	        ((TextView) getView().findViewById(R.id.textViewGames)).setText(""+ (p.games == null ? "0" : p.games.size()));
+	        mAdapter = new GameListAdapter(getActivity(), p.games, GAME_TYPE.ALL, false);
 	        setListAdapter(mAdapter);
 	        ((Spinner) getView().findViewById(R.id.spinnerType)).setOnItemSelectedListener(this);
         }
@@ -87,7 +87,7 @@ public class ProfileFragment extends ListFragment implements OnItemSelectedListe
     }
 
    void showDetails(int index) {
-	   if (index < mAdapter.getCount())
+	   if (index >= mAdapter.getCount())
 		   return;
         mCurCheckPosition = index;
     	Game g = mAdapter.getItem(index);
@@ -145,5 +145,14 @@ public class ProfileFragment extends ListFragment implements OnItemSelectedListe
 	
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
+	}
+	
+	@Override
+	public void onTap() {
+		try {
+			getListView().smoothScrollToPosition(0);
+	    } catch (NoSuchMethodError e) {
+	    	getListView().setSelectionAfterHeaderView();
+	    }
 	}
 }

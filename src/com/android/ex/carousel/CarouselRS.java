@@ -16,12 +16,28 @@
 
 package com.android.ex.carousel;
 
+import static android.renderscript.Element.A_8;
+import static android.renderscript.Element.RGBA_4444;
+import static android.renderscript.Element.RGBA_8888;
+import static android.renderscript.Element.RGB_565;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
-import android.renderscript.*;
-import static android.renderscript.Element.*;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.FileA3D;
+import android.renderscript.Float4;
+import android.renderscript.Matrix4f;
+import android.renderscript.Mesh;
+import android.renderscript.Program;
+import android.renderscript.ProgramFragment;
+import android.renderscript.ProgramRaster;
+import android.renderscript.ProgramStore;
+import android.renderscript.ProgramVertex;
+import android.renderscript.ProgramVertexFixedFunction;
 import android.renderscript.RenderScript.RSMessageHandler;
+import android.renderscript.RenderScriptGL;
+import android.renderscript.Sampler;
 import android.util.Log;
 
 /**

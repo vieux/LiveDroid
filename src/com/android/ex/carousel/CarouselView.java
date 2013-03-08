@@ -16,9 +16,6 @@
 
 package com.android.ex.carousel;
 
-import android.view.View;
-import com.android.ex.carousel.CarouselRS.CarouselCallback;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.renderscript.Float4;
@@ -28,6 +25,9 @@ import android.renderscript.RenderScriptGL;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
+import android.view.View;
+
+import com.android.ex.carousel.CarouselRS.CarouselCallback;
 
 /**
  * <p>

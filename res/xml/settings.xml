@@ -4,6 +4,7 @@
     <Preference android:key="license" android:title="@string/license" android:icon="@drawable/notepad"/>
     <Preference android:icon="@drawable/beaker" android:summary="@string/xboxapisubtitle" android:title="@string/xboxapititle" android:key="xboxapi"/>
     <Preference android:icon="@drawable/wrench" android:title="@string/fork" android:key="github"/>
+    <Preference android:icon="@drawable/hammer" android:title="API Limit" android:key="api_limit"/>
     
 
 </PreferenceScreen>
