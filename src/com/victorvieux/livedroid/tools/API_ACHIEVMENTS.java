@@ -10,11 +10,15 @@ import org.json.JSONObject;
 import com.victorvieux.livedroid.data.Achievement;
 
 public class API_ACHIEVMENTS extends JSONObject {
-	
+	public enum ACH_TYPE {ALL, WON, MISSING};
+
 	public API_ACHIEVMENTS(String str) throws JSONException {
 		super(str);
 	}
 
+	public String getApiLimit(){
+		return optString("API_Limit", "");
+	}
 	
 	public List<Achievement> getAchs() {
 		JSONArray jachs = optJSONArray("Achievements");

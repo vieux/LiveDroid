@@ -1,11 +1,19 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 	<style name="CustomProgressBarHorizontal" parent="android:Widget.ProgressBar.Horizontal">
           <item name="android:progressDrawable">@drawable/custom_progress_bar_horizontal</item>
 	</style>
 	
+
 	<style name="CustomTheme" parent="@style/Theme.Sherlock.Light">
-   		<item name="android:windowBackground">@drawable/whiten</item>
-    	<item name="android:colorBackground">@drawable/whiten</item>
+   		<item name="android:windowBackground">@android:color/white</item>
+   		<item name="android:colorBackground">@android:color/white</item>
+   		<item name="actionBarTabStyle">@style/Widget.Styled.TabView</item>
+    	<item name="android:actionBarTabStyle">@style/Widget.Styled.TabView</item>
+	</style>
+	
+	<style name="Widget.Styled.TabView" parent="Widget.Sherlock.ActionBar.TabView">
+    	<item name="android:background">@drawable/tab_indicator_ab</item>
+    	<item name="android:textColor">#ff2dab11</item>
 	</style>
 	
 	<style name="CustomThemeNoBg" parent="@style/Theme.Sherlock.Light">

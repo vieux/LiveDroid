@@ -2,7 +2,6 @@ package com.android.ex.carousel;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.os.HandlerThread;

@@ -16,14 +16,14 @@
 
 package com.android.ex.carousel;
 
-import com.android.ex.carousel.CarouselRS.CarouselCallback;
-import com.android.ex.carousel.CarouselView.DetailAlignment;
-
 import android.graphics.Bitmap;
 import android.renderscript.Float4;
 import android.renderscript.Mesh;
 import android.renderscript.RenderScriptGL;
 import android.util.Log;
+
+import com.android.ex.carousel.CarouselRS.CarouselCallback;
+import com.android.ex.carousel.CarouselView.DetailAlignment;
 
 /**
  * <p>

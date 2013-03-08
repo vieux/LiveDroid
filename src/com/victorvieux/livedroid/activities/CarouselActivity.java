@@ -29,8 +29,8 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.os.Bundle;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.android.ex.carousel.CarouselView;
 import com.android.ex.carousel.CarouselViewHelper;
 import com.androidquery.AQuery;
@@ -38,7 +38,7 @@ import com.victorvieux.livedroid.R;
 import com.victorvieux.livedroid.data.Player;
 import com.victorvieux.livedroid.tools.Network;
 
-public class CarouselActivity extends BaseActivty {
+public class CarouselActivity extends SherlockActivity {
     private static final int CARD_SLOTS = 56;
     private static final int SLOTS_VISIBLE = 7;
 
@@ -53,12 +53,16 @@ public class CarouselActivity extends BaseActivty {
     private Bitmap mBorder;
     
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getSupportMenuInflater();
-        inflater.inflate(R.menu.menu_carousel, menu);
-        return true;
-    } 
-
+   	public boolean onOptionsItemSelected(MenuItem item) {
+   	    switch (item.getItemId()) {
+   	        case android.R.id.home:
+   	        	finish();
+   	            return true;
+   	        default:
+   	            return super.onOptionsItemSelected(item);
+   	    }
+   	}
+ 
     class LocalCarouselViewHelper extends CarouselViewHelper {
         private DetailTextureParameters mDetailTextureParameters
                 = new DetailTextureParameters(5.0f, 5.0f, 3.0f, 10.0f);
@@ -76,9 +80,9 @@ public class CarouselActivity extends BaseActivty {
              intent.setClass(CarouselActivity.this, GameActivity.class);
              intent.putExtra("index", id);
              intent.putExtra("forced", true);
-             intent.putExtra("box", getPlayer().games.get(id).BoxArt_Small);
-             intent.putExtra("url", getPlayer().games.get(id).AchievementInfo);
-             intent.putExtra("title", getPlayer().games.get(id).Name);
+             intent.putExtra("box", mPlayer.games.get(id).BoxArt_Small);
+             intent.putExtra("url", mPlayer.games.get(id).AchievementInfo);
+             intent.putExtra("title", mPlayer.games.get(id).Name);
              startActivity(intent);	
         }
 
@@ -101,9 +105,9 @@ public class CarouselActivity extends BaseActivty {
 
         @Override
         public Bitmap getTexture(int n) {
-            Bitmap bitmap =  aq.getCachedImage(getPlayer().games.get(n).BoxArt_Large);
+            Bitmap bitmap =  aq.getCachedImage(mPlayer.games.get(n).BoxArt_Large);
             if (bitmap == null)
-            	bitmap = Network.loadBitmap(getPlayer().games.get(n).BoxArt_Large, aq);
+            	bitmap = Network.loadBitmap(mPlayer.games.get(n).BoxArt_Large, aq);
             return bitmap;
         }
 
@@ -115,14 +119,14 @@ public class CarouselActivity extends BaseActivty {
             mPaint.setTextSize(15.0f);
             mPaint.setTextAlign(Align.CENTER);
             mPaint.setAntiAlias(true);
-            canvas.drawText(getPlayer().games.get(n).Name, DETAIL_TEXTURE_WIDTH/2, DETAIL_TEXTURE_HEIGHT/2+4, mPaint);
+            canvas.drawText(mPlayer.games.get(n).Name, DETAIL_TEXTURE_WIDTH/2, DETAIL_TEXTURE_HEIGHT/2+4, mPaint);
             return bitmap;
         }
     };
 
     private Runnable mAddCardRunnable = new Runnable() {
         public void run() {
-            if (mView.getCardCount() < getPlayer().games.size()) {
+            if (mView.getCardCount() < mPlayer.games.size()) {
                 mView.createCards(mView.getCardCount() + 1);
                 mView.postDelayed(mAddCardRunnable, 2000);
             }
@@ -140,12 +144,16 @@ public class CarouselActivity extends BaseActivty {
                     .show();
             }
         });
-    }
-
+    }	
+    
+    private Player mPlayer;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setPlayer((Player) getIntent().getExtras().getSerializable("player"));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mPlayer = (Player) getIntent().getExtras().getSerializable("player");
 
         setContentView(R.layout.carousel);
         mView = (CarouselView) findViewById(R.id.carousel);
@@ -156,7 +164,7 @@ public class CarouselActivity extends BaseActivty {
         mHelper = new LocalCarouselViewHelper(this);
         mHelper.setCarouselView(mView);
         mView.setSlotCount(CARD_SLOTS);
-        mView.createCards(getPlayer().games == null ? 0 : (INCREMENTAL_ADD ? 1: getPlayer().games.size()));
+        mView.createCards(mPlayer.games == null ? 0 : (INCREMENTAL_ADD ? 1: mPlayer.games.size()));
         mView.setVisibleSlots(SLOTS_VISIBLE);
         mView.setStartAngle((float) -(2.0f*Math.PI * 5 / CARD_SLOTS));
         mBorder = BitmapFactory.decodeResource(res, R.drawable.border);
@@ -167,7 +175,7 @@ public class CarouselActivity extends BaseActivty {
         mView.setFadeInDuration(250);
         mView.setVisibleDetails(VISIBLE_DETAIL_COUNT);
         mView.setDragModel(CarouselView.DRAG_MODEL_PLANE);
-        if (getPlayer().games != null && INCREMENTAL_ADD) {
+        if (mPlayer.games != null && INCREMENTAL_ADD) {
             mView.postDelayed(mAddCardRunnable, 2000);
         }
     }

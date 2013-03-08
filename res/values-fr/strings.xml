@@ -5,6 +5,7 @@
     <string name="List">Liste</string>
     <string name="Avatar">Avatar</string>
     <string name="carousel">Carrousel</string>
+    <string name="_carousel">" CARROUSEL"</string>
     <string name="Trophies">Trophées</string>
     <string name="wallpaper">Mettre en fond d\'écran</string>
     <string name="loading">chargement...</string>
@@ -20,11 +21,18 @@
 	<string name="xboxapisubtitle">Merci à @djekl</string>
 	<string name="fork">Fork me on Github</string>
 	<string name="Guide">Guide</string>
-		<string-array name="types">
+	<string-array name="types">
         <item>Tous</item>
         <item>Retails</item>
         <item>Arcade</item>
     </string-array>
+    <string-array name="typesach">
+        <item>Tous</item>
+        <item>Gagnés</item>
+        <item>Manquants</item>
+    </string-array>
     <string name="no_games">Aucun jeu</string>
-		
+    <string name="refresh">rafraichir</string>
+    <string name="restart">Redémarrage de l\'application</string>
+    		
 </resources>

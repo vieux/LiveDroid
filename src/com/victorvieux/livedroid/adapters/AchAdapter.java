@@ -1,5 +1,6 @@
 package com.victorvieux.livedroid.adapters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -15,9 +16,13 @@ import android.widget.TextView;
 import com.androidquery.AQuery;
 import com.victorvieux.livedroid.R;
 import com.victorvieux.livedroid.data.Achievement;
+import com.victorvieux.livedroid.data.Game;
+import com.victorvieux.livedroid.tools.API_ACHIEVMENTS.ACH_TYPE;
+import com.victorvieux.livedroid.tools.API_GAMES.GAME_TYPE;
 
 public class AchAdapter extends BaseAdapter{
 	final List<Achievement> mAchs;
+	final List<Achievement> mFilteredAchs;
 	final LayoutInflater mLayoutInflater;
 	final AQuery aq;
 	final Context mContext;
@@ -26,29 +31,52 @@ public class AchAdapter extends BaseAdapter{
 	public AchAdapter(Context context, List<Achievement> achs, String gameName) {
 		aq = new AQuery(context);
 		mAchs = achs;
+		mFilteredAchs = new ArrayList<Achievement>();
 		mLayoutInflater = LayoutInflater.from(context);
 		mContext = context;
 		mGameName = gameName;
+		filter(ACH_TYPE.ALL);
 	}
 
+	public void filter(ACH_TYPE type) {
+		mFilteredAchs.clear();
+		if (mAchs != null) {
+		for (Achievement a : mAchs)
+			switch (type) {
+			case WON:
+				if (a.EarnedOn)
+					mFilteredAchs.add(a);
+				break;
+			case MISSING:
+				if (!a.EarnedOn)
+					mFilteredAchs.add(a);
+				break;
+			default:
+				mFilteredAchs.add(a);
+				break;
+		}
+		}
+		notifyDataSetChanged();
+	}
+	
 	@Override
 	public int getCount() {
-		return mAchs.size();
+		return mFilteredAchs.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return mAchs.get(position);
+		return mFilteredAchs.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		return mAchs.get(position).ID;
+		return mFilteredAchs.get(position).ID;
 	}
 	
 	@Override
 	public int getItemViewType(int position) {
-		return (mAchs.get(position).EarnedOn ? 0 : 1);
+		return (mFilteredAchs.get(position).EarnedOn ? 0 : 1);
 	}
 	
 	@Override
@@ -71,7 +99,7 @@ public class AchAdapter extends BaseAdapter{
 		} else
 			vh = (ViewHolder) convertView.getTag();
 		
-		final Achievement a = mAchs.get(position);
+		final Achievement a = mFilteredAchs.get(position);
 		
 		aq.id(vh.imageViewTile).image(a.TileUrl);
 		vh.textViewTitle.setText(a.Name);

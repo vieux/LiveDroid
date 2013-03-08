@@ -7,6 +7,7 @@
     <string name="List">List</string>
     <string name="Avatar">Avatar</string>
     <string name="carousel">Carousel</string>
+    <string name="_carousel">" CAROUSEL"</string>
     <string name="Trophies">Trophies</string>
     <string name="wallpaper">Set as wallpaper</string>
     <string name="loading">loading...</string>
@@ -22,11 +23,19 @@
 	<string name="xboxapisubtitle">Thanks to @djekl</string>
 	<string name="fork">Fork me on Github</string>
 	<string name="Guide">Guide</string>
-		<string-array name="types">
+	<string-array name="types">
         <item>All</item>
         <item>Retails</item>
         <item>Arcade</item>
     </string-array>
+    <string-array name="typesach">
+        <item>All</item>
+        <item>Won</item>
+        <item>Missing</item>
+    </string-array>
         <string name="login">login</string>
         <string name="no_games">No games</string>
+        <string name="refresh">Refresh</string>
+        <string name="restart">Restarting application</string>
+        
 </resources>
