@@ -34,6 +34,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.android.ex.carousel.CarouselView;
 import com.android.ex.carousel.CarouselViewHelper;
 import com.androidquery.AQuery;
+import com.victorvieux.livedroid.LiveDroidApp;
 import com.victorvieux.livedroid.R;
 import com.victorvieux.livedroid.data.Player;
 import com.victorvieux.livedroid.tools.Network;
@@ -151,9 +152,9 @@ public class CarouselActivity extends SherlockActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mPlayer = (Player) getIntent().getExtras().getSerializable("player");
+        mPlayer = ((LiveDroidApp)  getApplication()).getPlayer();//(Player) getIntent().getExtras().getSerializable("player");
 
         setContentView(R.layout.carousel);
         mView = (CarouselView) findViewById(R.id.carousel);
