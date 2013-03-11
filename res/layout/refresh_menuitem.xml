@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:addStatesFromChildren="true"
+              android:focusable="true"
+              android:paddingLeft="4dp"
+              android:paddingRight="4dp"
+              android:gravity="center"
+              style="?attr/actionButtonStyle">
+    <ProgressBar
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:focusable="true"
+            android:indeterminateDrawable="@anim/progress"
+            style="@android:style/Widget.ProgressBar"/>
+</LinearLayout> 

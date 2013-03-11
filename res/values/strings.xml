@@ -37,5 +37,6 @@
         <string name="no_games">No games</string>
         <string name="refresh">Refresh</string>
         <string name="restart">Restarting application</string>
+        <string name="api_error">Error, please try again later...</string>
         
 </resources>

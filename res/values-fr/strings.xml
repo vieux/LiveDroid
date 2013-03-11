@@ -34,5 +34,6 @@
     <string name="no_games">Aucun jeu</string>
     <string name="refresh">rafraichir</string>
     <string name="restart">Redémarrage de l\'application</string>
+   	<string name="api_error">Erreur, merci de réessayer plus tard...</string>
     		
 </resources>
