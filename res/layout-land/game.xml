@@ -15,14 +15,6 @@
         android:verticalSpacing="5dp" >
     </GridView>
 
-    <ProgressBar
-        android:id="@+id/progressBarLoading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:indeterminate="true" android:indeterminateDrawable="@anim/progress"/>
-
     <include
         android:id="@+id/x360a_ref"
         android:layout_width="fill_parent"
@@ -38,5 +30,14 @@
         android:layout_centerVertical="true"
         layout="@layout/relativelayoutbox" 
         android:visibility="gone"/>
+
+      <TextView
+          android:id="@+id/textViewLoading"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignTop="@+id/gridView"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="30dp"
+          android:text="@string/loading" />
 
 </RelativeLayout>

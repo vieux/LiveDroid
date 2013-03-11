@@ -28,17 +28,21 @@
     <TextView
         android:id="@+id/ButtonGuide"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
         android:layout_above="@+id/sep"
         android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
         android:layout_toRightOf="@+id/spinnerType"
         android:background="@drawable/block_x360a"
         android:drawableLeft="@drawable/x360alogosmall"
         android:gravity="center"
+        android:padding="5dp"
         android:text="@string/Guide"
         android:textColor="@color/x360a_green"
-        android:textSize="25dp"
-        android:textStyle="bold" android:padding="5dp" android:layout_marginRight="5dp" android:layout_marginBottom="5dp" android:visibility="invisible"/>
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
 
     <View
         android:layout_width="fill_parent"

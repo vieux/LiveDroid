@@ -10,7 +10,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.victorvieux.livedroid.R;
 import com.victorvieux.livedroid.fragments.GameFragment;
 
-public class GameActivity extends SherlockFragmentActivity {
+public class GameActivity extends SherlockFragmentActivity implements OnRefreshListener {
 
     private MenuItem mMenuRefresh;
 
@@ -28,8 +28,7 @@ public class GameActivity extends SherlockFragmentActivity {
         if (savedInstanceState == null) {
             GameFragment game = new GameFragment();
             game.setArguments(getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction().add(
-                    android.R.id.content, game).commit();
+            getSupportFragmentManager().beginTransaction().add(android.R.id.content, game).commit();
         }
     }
 	
@@ -40,9 +39,18 @@ public class GameActivity extends SherlockFragmentActivity {
 	        case android.R.id.home:
 	        	finish();
 	            return true;
+	        case R.id.itemRefresh:
+	        	((GameFragment) getSupportFragmentManager().findFragmentById(android.R.id.content)).onRefresh(true);
+	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
+	}
+    
+    public void setRefresh(boolean refresh) {
+		try {
+			if (mMenuRefresh != null) mMenuRefresh.setActionView(refresh ? R.layout.refresh_menuitem : null);
+		}catch (NullPointerException ex) {invalidateOptionsMenu();};
 	}
     
     @Override

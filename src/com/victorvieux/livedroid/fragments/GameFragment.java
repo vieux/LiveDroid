@@ -15,9 +15,12 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.GridView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
+import com.devspark.appmsg.AppMsg;
 import com.victorvieux.livedroid.R;
+import com.victorvieux.livedroid.activities.OnRefreshListener;
 import com.victorvieux.livedroid.adapters.AchAdapter;
 import com.victorvieux.livedroid.api.RestClient;
 import com.victorvieux.livedroid.tools.API_ACHIEVMENTS;
@@ -86,64 +89,7 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 		aq.id(R.id.MainImageViewBox).image(getShownBox());
 		getView().findViewById(R.id.MainImageViewBox).setOnClickListener(this);
 
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater,
-			ViewGroup container, Bundle savedInstanceState) {
-		if (container == null) {
-			return null;
-		}
-
-		RestClient.get(getActivity(), new CachedAsyncHttpResponseHandler() {
-			@Override
-			public void onStart() {
-				String cache = getCache();
-				if (cache == null) return;
-				try {
-					API_ACHIEVMENTS api_achs = new API_ACHIEVMENTS(cache);
-					PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString("API_LIMIT", api_achs.getApiLimit()).commit();
-
-					if (api_achs.Success()) {
-						GridView gal = (GridView) GameFragment.this.getView().findViewById(R.id.gridView);
-						mAdapter = new AchAdapter(GameFragment.this.getActivity(), api_achs.getAchs(), GameFragment.this.getShownTitle());
-						gal.setAdapter(mAdapter);	
-						getView().findViewById(R.id.spinnerType).setVisibility(View.VISIBLE);
-						((Spinner)getView().findViewById(R.id.spinnerType)).setOnItemSelectedListener(GameFragment.this);
-					}
-				} catch (Exception e) {
-				}
-			}
-			@Override
-			public void onSuccess(String response) {
-				super.onSuccess(response);
-				if (GameFragment.this.getView() != null) {
-					GameFragment.this.getView().findViewById(R.id.progressBarLoading).setVisibility(View.GONE);
-
-					try {
-						API_ACHIEVMENTS api_achs = new API_ACHIEVMENTS(response);
-						if (api_achs.Success()) {
-							GridView gal = (GridView) GameFragment.this.getView().findViewById(R.id.gridView);
-							mAdapter = new AchAdapter(GameFragment.this.getActivity(), api_achs.getAchs(), GameFragment.this.getShownTitle());
-							mAdapter.filter(getFilter());
-							gal.setAdapter(mAdapter);	
-							getView().findViewById(R.id.spinnerType).setVisibility(View.VISIBLE);
-							((Spinner)getView().findViewById(R.id.spinnerType)).setOnItemSelectedListener(GameFragment.this);
-						}
-					} catch (Exception e) {
-					}
-				}
-			}
-
-			@Override
-			public void onFailure(Throwable error) {
-				if (GameFragment.this.getView() != null) {
-					GameFragment.this.getView().findViewById(R.id.progressBarLoading).setVisibility(View.GONE);
-				}
-			}
-
-		}, getShownUrl());
-
+		onRefresh(false);
 
 		RestClient.get(getActivity(), new CachedAsyncHttpResponseHandler() {
 			@Override
@@ -162,15 +108,21 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 					});
 				}
 			}
-
-
-
 		}, getx360aUrl());
+		
+	}
 
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		if (container == null)
+			return null;
 
 		View root = inflater.inflate(R.layout.game, container, false);
 		((TextView) root.findViewById(R.id.MainTextViewTitle)).setText(getShownTitle());
 		root.findViewById(R.id.imageViewBoxBig).setOnClickListener(this);
+		
+		GridView gal = (GridView) root.findViewById(R.id.gridView);
+		gal.setEmptyView(root.findViewById(R.id.textViewLoading));
 		return root;
 	}
 
@@ -190,6 +142,60 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 
 
 
+	public void onRefresh(final boolean b) {
+		RestClient.get(getActivity(), new CachedAsyncHttpResponseHandler() {
+			@Override
+			public void onStart() {
+				((OnRefreshListener) getActivity()).setRefresh(true);
+
+				if (!b) {
+					String cache = getCache();
+					if (cache == null) return;
+					try {
+						API_ACHIEVMENTS api_achs = new API_ACHIEVMENTS(cache);
+						PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString("API_LIMIT", api_achs.getApiLimit()).commit();
+						if (api_achs.Success()) {
+							GridView gal = (GridView) GameFragment.this.getView().findViewById(R.id.gridView);
+							mAdapter = new AchAdapter(GameFragment.this.getActivity(), api_achs.getAchs(), GameFragment.this.getShownTitle());
+							mAdapter.filter(getFilter());
+							gal.setAdapter(mAdapter);	
+							getView().findViewById(R.id.spinnerType).setVisibility(View.VISIBLE);
+							((Spinner)getView().findViewById(R.id.spinnerType)).setOnItemSelectedListener(GameFragment.this);
+						}
+					} catch (Exception e) {}
+				}
+			}
+			
+			@Override
+			public void onSuccess(String response) {
+				super.onSuccess(response);
+					try {
+						API_ACHIEVMENTS api_achs = new API_ACHIEVMENTS(response);
+						if (api_achs.Success()) {
+							GridView gal = (GridView) GameFragment.this.getView().findViewById(R.id.gridView);
+							mAdapter = new AchAdapter(GameFragment.this.getActivity(), api_achs.getAchs(), GameFragment.this.getShownTitle());
+							mAdapter.filter(getFilter());
+							gal.setAdapter(mAdapter);	
+							getView().findViewById(R.id.spinnerType).setVisibility(View.VISIBLE);
+							((Spinner)getView().findViewById(R.id.spinnerType)).setOnItemSelectedListener(GameFragment.this);
+						}
+					} catch (Exception e) {
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable error) {
+				AppMsg.makeText(getActivity(), R.string.api_error, AppMsg.STYLE_ALERT).show();
+			}
+			
+			@Override
+			public void onFinish() {
+				if (getActivity() != null)
+					((OnRefreshListener) getActivity()).setRefresh(false);
+			}
+
+		}, getShownUrl());
+	}
 
 
 	@Override
