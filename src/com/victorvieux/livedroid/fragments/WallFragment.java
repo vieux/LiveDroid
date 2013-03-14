@@ -20,7 +20,7 @@ public class WallFragment extends SherlockFragment implements OnItemClickListene
 
 
 	public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View root = inflater.inflate(R.layout.wall, container, false);
+		View root = inflater.inflate(R.layout.fragment_wall, container, false);
 
 		((GridView) root.findViewById(R.id.gridView)).setEmptyView(root.findViewById(android.R.id.empty));
 		((GridView) root.findViewById(R.id.gridView)).setAdapter(new GameGridAdapter(getActivity(), ((MainActivity)getActivity()).getPlayer().games));

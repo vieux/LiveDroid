@@ -88,7 +88,7 @@ public class AchAdapter extends BaseAdapter{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder vh;
 		if (convertView == null) {
-			convertView = mLayoutInflater.inflate(getItemViewType(position) == 0 ? R.layout.ach_owned_item : R.layout.ach_item, null);
+			convertView = mLayoutInflater.inflate(getItemViewType(position) == 0 ? R.layout.item_ach_owned : R.layout.item_ach, null);
 			vh = new ViewHolder();
 			vh.imageViewTile = (ImageView) convertView.findViewById(R.id.imageViewTile);
 			vh.textViewTitle = (TextView) convertView.findViewById(R.id.textViewTitle);

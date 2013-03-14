@@ -156,7 +156,7 @@ public class CarouselActivity extends SherlockActivity {
 
         mPlayer = ((LiveDroidApp)  getApplication()).getPlayer();//(Player) getIntent().getExtras().getSerializable("player");
 
-        setContentView(R.layout.carousel);
+        setContentView(R.layout.fragment_carousel);
         mView = (CarouselView) findViewById(R.id.carousel);
         mView.getHolder().setFormat(PixelFormat.RGBA_8888);
         mPaint.setColor(0xffffffff);

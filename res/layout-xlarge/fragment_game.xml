@@ -20,7 +20,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        layout="@layout/x360a" />
+        layout="@layout/include_game_top" />
 
      <include
         android:id="@+id/relativeLayoutBox"

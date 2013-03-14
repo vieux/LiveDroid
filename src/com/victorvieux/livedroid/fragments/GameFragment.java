@@ -117,7 +117,7 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 		if (container == null)
 			return null;
 
-		View root = inflater.inflate(R.layout.game, container, false);
+		View root = inflater.inflate(R.layout.fragment_game, container, false);
 		((TextView) root.findViewById(R.id.MainTextViewTitle)).setText(getShownTitle());
 		root.findViewById(R.id.imageViewBoxBig).setOnClickListener(this);
 		
@@ -146,7 +146,9 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 		RestClient.get(getActivity(), new CachedAsyncHttpResponseHandler() {
 			@Override
 			public void onStart() {
-				((OnRefreshListener) getActivity()).setRefresh(true);
+				
+				if (getActivity() instanceof OnRefreshListener)
+					((OnRefreshListener) getActivity()).setRefresh(true);
 
 				if (!b) {
 					String cache = getCache();
@@ -190,7 +192,7 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 			
 			@Override
 			public void onFinish() {
-				if (getActivity() != null)
+				if (getActivity() != null && getActivity() instanceof OnRefreshListener)
 					((OnRefreshListener) getActivity()).setRefresh(false);
 			}
 

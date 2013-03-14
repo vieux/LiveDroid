@@ -16,22 +16,20 @@ import com.victorvieux.livedroid.LiveDroidApp;
 import com.victorvieux.livedroid.R;
 import com.victorvieux.livedroid.data.Player;
 import com.victorvieux.livedroid.fragments.CarouselFragment;
+import com.victorvieux.livedroid.fragments.ListFragment;
 import com.victorvieux.livedroid.fragments.OnTapListener;
-import com.victorvieux.livedroid.fragments.ProfileFragment;
 import com.victorvieux.livedroid.fragments.TrophiesFragment;
 import com.victorvieux.livedroid.fragments.WallFragment;
 
-/**
- * This demonstrates how you can implement switching between the tabs of a
- * TabHost through fragments.  It uses a trick (see the code below) to allow
- * the tabs to switch between fragments instead of simple views.
- */
-public class MainActivity extends SherlockFragmentActivity {
+public class MainActivity extends SherlockFragmentActivity implements OnRefreshListener {
     private Player mPlayer;
    
     public Player getPlayer() {
 		return mPlayer;
 	}
+   
+    private MenuItem mMenuRefresh;
+
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +37,7 @@ public class MainActivity extends SherlockFragmentActivity {
         mPlayer = (Player) getIntent().getExtras().getSerializable("player");
         ((LiveDroidApp)  getApplication()).setPlayer(mPlayer);
 
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_main);
         ActionBar bar = getSupportActionBar();
 
         getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -47,7 +45,7 @@ public class MainActivity extends SherlockFragmentActivity {
         ActionBar.Tab tabB = bar.newTab().setIcon(R.drawable.ic_apps).setText(R.string.wall);
         ActionBar.Tab tabC = bar.newTab().setIcon(R.drawable.ic_action_achievement).setText(R.string.Trophies);
         
-        tabA.setTabListener(new MyTabsListener(new ProfileFragment()));
+        tabA.setTabListener(new MyTabsListener(new ListFragment()));
         tabB.setTabListener(new MyTabsListener(new WallFragment()));
         tabC.setTabListener(new MyTabsListener(new TrophiesFragment()));
 
@@ -67,8 +65,17 @@ public class MainActivity extends SherlockFragmentActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.menu, menu);
+		mMenuRefresh = menu.findItem(R.id.itemRefresh);
         return true;
     } 
+    
+    @Override
+	public boolean onPrepareOptionsMenu (Menu menu) {
+		mMenuRefresh = menu.findItem(R.id.itemRefresh);
+		if (mMenuRefresh != null)
+			menu.findItem(R.id.itemRefresh).setVisible( getSupportActionBar().getSelectedTab().getPosition() == 0);
+		return true;
+    }
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -97,7 +104,7 @@ public class MainActivity extends SherlockFragmentActivity {
 
         public void onTabSelected(Tab tab, FragmentTransaction ft) {
             ft.replace(R.id.fragment_container, fragment);
-
+            invalidateOptionsMenu();
         }
 
         public void onTabUnselected(Tab tab, FragmentTransaction ft) {
@@ -105,4 +112,12 @@ public class MainActivity extends SherlockFragmentActivity {
         }
 
     }
+
+
+	@Override
+	public void setRefresh(boolean refresh) {
+			try {
+				if (mMenuRefresh != null) mMenuRefresh.setActionView(refresh ? R.layout.refresh_menuitem : null);
+			}catch (NullPointerException ex) {invalidateOptionsMenu();};
+	}
 }

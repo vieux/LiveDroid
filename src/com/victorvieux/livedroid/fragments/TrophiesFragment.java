@@ -29,7 +29,7 @@ public class TrophiesFragment extends SherlockFragment implements OnItemClickLis
 	private List<Game> moreThan;
 
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    	View root = inflater.inflate(R.layout.trophies, container, false);
+    	View root = inflater.inflate(R.layout.fragment_trophies, container, false);
 
         
         completed = new ArrayList<Game>();
