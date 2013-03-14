@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:layout_gravity="center">
 
-    <include layout="@layout/top" android:id="@+id/top"/>
+    <include layout="@layout/include_profile_top" android:id="@+id/top"/>
     
     <View android:layout_width="fill_parent" android:layout_height="2dp" android:background="@color/xbox_green" android:id="@+id/sep" android:layout_below="@+id/top"></View>
     <ListView

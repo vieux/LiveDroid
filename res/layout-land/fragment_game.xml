@@ -8,18 +8,21 @@
         android:id="@+id/gridView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:padding="5dp"
         android:layout_below="@+id/x360a_ref"
-        android:numColumns="3" android:horizontalSpacing="5dp" android:verticalSpacing="5dp">
+        android:horizontalSpacing="5dp"
+        android:numColumns="2"
+        android:padding="5dp"
+        android:verticalSpacing="5dp" >
     </GridView>
 
-        <include
+    <include
         android:id="@+id/x360a_ref"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        layout="@layout/x360a"/>
-         <include
+        layout="@layout/include_game_top" />
+
+     <include
         android:id="@+id/relativeLayoutBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,13 +30,14 @@
         android:layout_centerVertical="true"
         layout="@layout/relativelayoutbox" 
         android:visibility="gone"/>
-         
-          <TextView
-         android:id="@+id/textViewLoading"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_centerHorizontal="true"
-         android:layout_centerVertical="true"
-         android:text="@string/loading"
-         android:visibility="gone" />
+
+      <TextView
+          android:id="@+id/textViewLoading"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignTop="@+id/gridView"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="30dp"
+          android:text="@string/loading" />
+
 </RelativeLayout>

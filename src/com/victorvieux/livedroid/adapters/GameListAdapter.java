@@ -73,7 +73,7 @@ public class GameListAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder vh;
 		if (convertView == null) {
-			convertView = mLayoutInflater.inflate(mSmall ? R.layout.game_item_small_list : R.layout.game_item_list, null);
+			convertView = mLayoutInflater.inflate(mSmall ? R.layout.item_game_trophy : R.layout.item_game, null);
 			vh = new ViewHolder();
 			vh.imageViewBox = (ImageView) convertView.findViewById(R.id.imageViewBox);
 			vh.textViewTitle = (TextView) convertView.findViewById(R.id.textViewTitle);

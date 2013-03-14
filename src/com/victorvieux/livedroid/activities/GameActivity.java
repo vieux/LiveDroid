@@ -60,4 +60,10 @@ public class GameActivity extends SherlockFragmentActivity implements OnRefreshL
 	    mMenuRefresh = menu.findItem(R.id.itemRefresh);
 	    return true;
 	}
+    
+    @Override
+  	public boolean onPrepareOptionsMenu (Menu menu) {
+  		mMenuRefresh = menu.findItem(R.id.itemRefresh);
+  		return true;
+    }
 }
