@@ -16,6 +16,9 @@
 
 package com.victorvieux.livedroid.activities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -36,7 +39,8 @@ import com.android.ex.carousel.CarouselViewHelper;
 import com.androidquery.AQuery;
 import com.victorvieux.livedroid.LiveDroidApp;
 import com.victorvieux.livedroid.R;
-import com.victorvieux.livedroid.data.Player;
+import com.victorvieux.livedroid.api.data.Game;
+import com.victorvieux.livedroid.api.data.Game.GAME_TYPE;
 import com.victorvieux.livedroid.tools.Network;
 
 public class CarouselActivity extends SherlockActivity {
@@ -81,9 +85,10 @@ public class CarouselActivity extends SherlockActivity {
              intent.setClass(CarouselActivity.this, GameActivity.class);
              intent.putExtra("index", id);
              intent.putExtra("forced", true);
-             intent.putExtra("box", mPlayer.games.get(id).BoxArt_Small);
-             intent.putExtra("url", mPlayer.games.get(id).AchievementInfo);
-             intent.putExtra("title", mPlayer.games.get(id).Name);
+             intent.putExtra("box_small", mGames.get(id).BoxArt.Small);
+             intent.putExtra("box_large", mGames.get(id).BoxArt.Large);
+             intent.putExtra("url", mGames.get(id).AchievementInfo);
+             intent.putExtra("title", mGames.get(id).Name);
              startActivity(intent);	
         }
 
@@ -106,9 +111,9 @@ public class CarouselActivity extends SherlockActivity {
 
         @Override
         public Bitmap getTexture(int n) {
-            Bitmap bitmap =  aq.getCachedImage(mPlayer.games.get(n).BoxArt_Large);
+            Bitmap bitmap =  aq.getCachedImage(mGames.get(n).BoxArt.Large);
             if (bitmap == null)
-            	bitmap = Network.loadBitmap(mPlayer.games.get(n).BoxArt_Large, aq);
+            	bitmap = Network.loadBitmap(mGames.get(n).BoxArt.Large, aq);
             return bitmap;
         }
 
@@ -120,14 +125,14 @@ public class CarouselActivity extends SherlockActivity {
             mPaint.setTextSize(15.0f);
             mPaint.setTextAlign(Align.CENTER);
             mPaint.setAntiAlias(true);
-            canvas.drawText(mPlayer.games.get(n).Name, DETAIL_TEXTURE_WIDTH/2, DETAIL_TEXTURE_HEIGHT/2+4, mPaint);
+            canvas.drawText(mGames.get(n).Name, DETAIL_TEXTURE_WIDTH/2, DETAIL_TEXTURE_HEIGHT/2+4, mPaint);
             return bitmap;
         }
     };
 
     private Runnable mAddCardRunnable = new Runnable() {
         public void run() {
-            if (mView.getCardCount() < mPlayer.games.size()) {
+            if (mView.getCardCount() < mGames.size()) {
                 mView.createCards(mView.getCardCount() + 1);
                 mView.postDelayed(mAddCardRunnable, 2000);
             }
@@ -147,14 +152,18 @@ public class CarouselActivity extends SherlockActivity {
         });
     }	
     
-    private Player mPlayer;
+    private List<Game> mGames = new ArrayList<Game>();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mPlayer = ((LiveDroidApp)  getApplication()).getPlayer();//(Player) getIntent().getExtras().getSerializable("player");
+        List<Game> gs = ((LiveDroidApp)  getApplication()).getGames();
+        for (Game g : gs) {
+        	if (g.getType() != GAME_TYPE.APP)
+        		mGames.add(g);
+        }
 
         setContentView(R.layout.fragment_carousel);
         mView = (CarouselView) findViewById(R.id.carousel);
@@ -165,7 +174,7 @@ public class CarouselActivity extends SherlockActivity {
         mHelper = new LocalCarouselViewHelper(this);
         mHelper.setCarouselView(mView);
         mView.setSlotCount(CARD_SLOTS);
-        mView.createCards(mPlayer.games == null ? 0 : (INCREMENTAL_ADD ? 1: mPlayer.games.size()));
+        mView.createCards(mGames == null ? 0 : (INCREMENTAL_ADD ? 1: mGames.size()));
         mView.setVisibleSlots(SLOTS_VISIBLE);
         mView.setStartAngle((float) -(2.0f*Math.PI * 5 / CARD_SLOTS));
         mBorder = BitmapFactory.decodeResource(res, R.drawable.border);
@@ -176,7 +185,7 @@ public class CarouselActivity extends SherlockActivity {
         mView.setFadeInDuration(250);
         mView.setVisibleDetails(VISIBLE_DETAIL_COUNT);
         mView.setDragModel(CarouselView.DRAG_MODEL_PLANE);
-        if (mPlayer.games != null && INCREMENTAL_ADD) {
+        if (mGames != null && INCREMENTAL_ADD) {
             mView.postDelayed(mAddCardRunnable, 2000);
         }
     }

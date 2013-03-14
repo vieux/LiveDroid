@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,8 @@ import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.victorvieux.livedroid.R;
-import com.victorvieux.livedroid.data.Game;
-import com.victorvieux.livedroid.tools.API_GAMES.GAME_TYPE;
+import com.victorvieux.livedroid.api.data.Game;
+import com.victorvieux.livedroid.api.data.Game.GAME_TYPE;
 
 public class GameListAdapter extends BaseAdapter {
 	final List<Game> mGames;
@@ -39,15 +40,20 @@ public class GameListAdapter extends BaseAdapter {
 		for (Game g : mGames)
 			switch (type) {
 			case ARCADE:
-				if (g.GameType == GAME_TYPE.ARCADE)
+				if (g.getType() == GAME_TYPE.ARCADE)
 					mFilteredGames.add(g);
 				break;
 			case RETAIL:
-				if (g.GameType == GAME_TYPE.RETAIL)
+				if (g.getType() == GAME_TYPE.RETAIL)
+					mFilteredGames.add(g);
+				break;
+			case APP:
+				if (g.getType() == GAME_TYPE.APP)
 					mFilteredGames.add(g);
 				break;
 			default:
-				mFilteredGames.add(g);
+				if (g.getType() != GAME_TYPE.APP)
+					mFilteredGames.add(g);
 				break;
 		}
 		}
@@ -85,12 +91,12 @@ public class GameListAdapter extends BaseAdapter {
 			vh = (ViewHolder) convertView.getTag();
 		
 		Game g = mFilteredGames.get(position);
-		aq.id(vh.imageViewBox).image(g.BoxArt_Small);
+		aq.id(vh.imageViewBox).image(g.BoxArt.Small);
 		vh.textViewTitle.setText(g.Name);
-		vh.textViewScore.setText(g.Progress_Score + " / " + g.PossibleScore);
-		vh.textViewAch.setText(g.Progress_Achievements + " / " + g.PossibleAchievements);
+		vh.textViewScore.setText(g.Progress.Score + " / " + g.PossibleScore);
+		vh.textViewAch.setText(g.Progress.Achievements + " / " + g.PossibleAchievements);
 		
-		vh.progressBar.setProgress(g.Progress_Score * 100 / g.PossibleScore);
+		vh.progressBar.setProgress(g.Progress.Score * 100 / g.PossibleScore);
 
 		return convertView;
 	}

@@ -1,9 +1,13 @@
 package com.victorvieux.livedroid;
 
+import java.util.List;
+
 import android.app.Application;
 
 import com.androidquery.callback.BitmapAjaxCallback;
-import com.victorvieux.livedroid.data.Player;
+import com.victorvieux.livedroid.api.data.Game;
+import com.victorvieux.livedroid.api.data.Player;
+import com.victorvieux.livedroid.api.endpoints.Games;
 
 public class LiveDroidApp extends Application{	
 	
@@ -12,14 +16,18 @@ public class LiveDroidApp extends Application{
     	BitmapAjaxCallback.clearCache();
     }
     
-    private Player mPlayer;
+    private Games mRoot;
     
-    public Player getPlayer() {
-		return mPlayer;
+    public List<Game> getGames() {
+		return mRoot.Games;
 	}
     
-    public void setPlayer(Player player) {
-    	mPlayer = player;
+    public Player getPlayer() {
+    	return mRoot.Player;
+    }
+    
+    public void setRoot(Games root) {
+    	mRoot = root;
     }
         
 }

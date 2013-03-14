@@ -15,10 +15,8 @@ import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.victorvieux.livedroid.R;
-import com.victorvieux.livedroid.data.Achievement;
-import com.victorvieux.livedroid.data.Game;
-import com.victorvieux.livedroid.tools.API_ACHIEVMENTS.ACH_TYPE;
-import com.victorvieux.livedroid.tools.API_GAMES.GAME_TYPE;
+import com.victorvieux.livedroid.api.data.Achievement;
+import com.victorvieux.livedroid.api.data.Achievement.ACH_TYPE;
 
 public class AchAdapter extends BaseAdapter{
 	final List<Achievement> mAchs;
@@ -44,11 +42,11 @@ public class AchAdapter extends BaseAdapter{
 		for (Achievement a : mAchs)
 			switch (type) {
 			case WON:
-				if (a.EarnedOn)
+				if (a.getType() == ACH_TYPE.WON)
 					mFilteredAchs.add(a);
 				break;
 			case MISSING:
-				if (!a.EarnedOn)
+				if (a.getType() == ACH_TYPE.MISSING)
 					mFilteredAchs.add(a);
 				break;
 			default:
@@ -76,7 +74,7 @@ public class AchAdapter extends BaseAdapter{
 	
 	@Override
 	public int getItemViewType(int position) {
-		return (mFilteredAchs.get(position).EarnedOn ? 0 : 1);
+		return (mFilteredAchs.get(position).getType() == ACH_TYPE.WON ? 0 : 1);
 	}
 	
 	@Override

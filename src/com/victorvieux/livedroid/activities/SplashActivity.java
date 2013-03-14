@@ -14,9 +14,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import com.google.gson.Gson;
 import com.victorvieux.livedroid.R;
 import com.victorvieux.livedroid.api.RestClient;
-import com.victorvieux.livedroid.tools.API_GAMES;
+import com.victorvieux.livedroid.api.endpoints.Games;
 import com.victorvieux.livedroid.tools.CachedAsyncHttpResponseHandler;
 import com.victorvieux.livedroid.tools.LiveDroidFountain;
 import com.victorvieux.livedroid.tools.Misc;
@@ -64,19 +65,15 @@ public class SplashActivity extends Activity {
 			public void onStart() {
 				String cache = getCache();
 				if (cache != null) {
-					try {
-						API_GAMES api_games = new API_GAMES(cache);
-						if (api_games.Success()) {
-							Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-							intent.putExtra("player", api_games.getPlayer());
-							SplashActivity.this.startActivity(intent);
-						} else
-							((ViewSwitcher)SplashActivity.this.findViewById(R.id.viewSwitcherLogin)).showPrevious();
-
-
-					} catch (Exception e) {
-						((ViewSwitcher)SplashActivity.this.findViewById(R.id.viewSwitcherLogin)).showPrevious();
+					Gson gson = new Gson();
+					Games games = gson.fromJson(cache, Games.class);
+					if (games != null && games.Success) {
+						Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+						intent.putExtra("root", games);
+						SplashActivity.this.startActivity(intent);
 					}
+					else
+						((ViewSwitcher)SplashActivity.this.findViewById(R.id.viewSwitcherLogin)).showPrevious();
 					SplashActivity.this.mLiveDroidFountain.stop();
 				}
 			}
@@ -84,20 +81,15 @@ public class SplashActivity extends Activity {
 			public void onSuccess(String response) {
 				super.onSuccess(response);
 				if (hadCache()) return;
-				try {
-					API_GAMES api_games = new API_GAMES(response);
-					PreferenceManager.getDefaultSharedPreferences(SplashActivity.this).edit().putString("API_LIMIT", api_games.getApiLimit()).commit();
-					if (api_games.Success()) {
-						Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-						intent.putExtra("player", api_games.getPlayer());
-						SplashActivity.this.startActivity(intent);
-					} else
-						((ViewSwitcher)SplashActivity.this.findViewById(R.id.viewSwitcherLogin)).showPrevious();
-
-
-				} catch (Exception e) {
-					((ViewSwitcher)SplashActivity.this.findViewById(R.id.viewSwitcherLogin)).showPrevious();
+				Gson gson = new Gson();
+				Games games = gson.fromJson(response, Games.class);
+				if (games != null && games.Success) {
+					Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+					intent.putExtra("root", games);
+					SplashActivity.this.startActivity(intent);
 				}
+				else
+					((ViewSwitcher)SplashActivity.this.findViewById(R.id.viewSwitcherLogin)).showPrevious();
 				SplashActivity.this.mLiveDroidFountain.stop();
 			}
 

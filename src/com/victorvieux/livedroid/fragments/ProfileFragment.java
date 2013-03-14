@@ -1,5 +1,7 @@
 package com.victorvieux.livedroid.fragments;
 
+import java.util.List;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -12,19 +14,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
+import com.victorvieux.livedroid.LiveDroidApp;
 import com.victorvieux.livedroid.R;
 import com.victorvieux.livedroid.activities.GameActivity;
 import com.victorvieux.livedroid.activities.MainActivity;
 import com.victorvieux.livedroid.adapters.GameListAdapter;
-import com.victorvieux.livedroid.data.Game;
-import com.victorvieux.livedroid.data.Player;
-import com.victorvieux.livedroid.tools.API_GAMES.GAME_TYPE;
+import com.victorvieux.livedroid.api.data.Game;
+import com.victorvieux.livedroid.api.data.Game.GAME_TYPE;
+import com.victorvieux.livedroid.api.data.Player;
 
 public class ProfileFragment extends ListFragment implements OnItemSelectedListener, OnTapListener{
     boolean mDualPane;
@@ -42,7 +44,8 @@ public class ProfileFragment extends ListFragment implements OnItemSelectedListe
     public void onActivityCreated(Bundle savedState) {
         super.onActivityCreated(savedState);
         
-        Player p = ((MainActivity)  getActivity()).getPlayer();
+        Player p = ((LiveDroidApp)  getActivity().getApplication()).getPlayer();
+        List<Game> gs = ((LiveDroidApp)  getActivity().getApplication()).getGames();
         if (p != null) {
         	SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         	Editor e = sp.edit();
@@ -50,11 +53,11 @@ public class ProfileFragment extends ListFragment implements OnItemSelectedListe
         	e.commit();
         	
         	AQuery aq = new AQuery(getActivity());
-        	aq.id(R.id.imageViewProfile).image(p.Avatar_Gamertile);
+        	aq.id(R.id.imageViewProfile).image(p.Avatar.Gamertile.Large);
 	        ((TextView) getView().findViewById(R.id.textViewGamerTag)).setText(p.Gamertag);
-	        ((TextView) getView().findViewById(R.id.textViewScore)).setText(p.Gamerscore);
-	        ((TextView) getView().findViewById(R.id.textViewGames)).setText(""+ (p.games == null ? "0" : p.games.size()));
-	        mAdapter = new GameListAdapter(getActivity(), p.games, GAME_TYPE.ALL, false);
+	        ((TextView) getView().findViewById(R.id.textViewScore)).setText(""+p.Gamerscore);
+	        ((TextView) getView().findViewById(R.id.textViewGames)).setText(""+ (gs == null ? "0" : gs.size()));
+	        mAdapter = new GameListAdapter(getActivity(), gs, GAME_TYPE.ALL, false);
 	        setListAdapter(mAdapter);
 	        ((Spinner) getView().findViewById(R.id.spinnerType)).setOnItemSelectedListener(this);
         }
@@ -102,7 +105,7 @@ public class ProfileFragment extends ListFragment implements OnItemSelectedListe
                     getFragmentManager().findFragmentById(R.id.details);
             if (details == null || details.getShownIndex() != index) {
                 // Make new fragment to show this selection.
-                details = GameFragment.newInstance(index, g.AchievementInfo, g.Name, g.BoxArt_Small);
+                details = GameFragment.newInstance(index, g.AchievementInfo, g.Name, g.BoxArt.Small, g.BoxArt.Large);
 
                 // Execute a transaction, replacing any existing
                 // fragment with this one inside the frame.
@@ -122,7 +125,8 @@ public class ProfileFragment extends ListFragment implements OnItemSelectedListe
             intent.putExtra("index", index);
             intent.putExtra("url", g.AchievementInfo);
             intent.putExtra("title", g.Name);
-            intent.putExtra("box", g.BoxArt_Small);
+            intent.putExtra("box_small", g.BoxArt.Small);
+            intent.putExtra("box_large", g.BoxArt.Large);
             startActivity(intent);
         }
     }

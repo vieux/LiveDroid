@@ -14,7 +14,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.victorvieux.livedroid.LiveDroidApp;
 import com.victorvieux.livedroid.R;
-import com.victorvieux.livedroid.data.Player;
+import com.victorvieux.livedroid.api.endpoints.Games;
 import com.victorvieux.livedroid.fragments.CarouselFragment;
 import com.victorvieux.livedroid.fragments.ListFragment;
 import com.victorvieux.livedroid.fragments.OnTapListener;
@@ -22,20 +22,14 @@ import com.victorvieux.livedroid.fragments.TrophiesFragment;
 import com.victorvieux.livedroid.fragments.WallFragment;
 
 public class MainActivity extends SherlockFragmentActivity implements OnRefreshListener {
-    private Player mPlayer;
-   
-    public Player getPlayer() {
-		return mPlayer;
-	}
-   
     private MenuItem mMenuRefresh;
 
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPlayer = (Player) getIntent().getExtras().getSerializable("player");
-        ((LiveDroidApp)  getApplication()).setPlayer(mPlayer);
+        Games root = (Games) getIntent().getExtras().getSerializable("root");
+        ((LiveDroidApp)  getApplication()).setRoot(root);
 
         setContentView(R.layout.activity_main);
         ActionBar bar = getSupportActionBar();

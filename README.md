@@ -15,13 +15,30 @@ DONE
 +   Display all your games (Xbox Retails, Xbox Arcade and Windows games)
 +   Link to an achivements guide from [x360a.com](x360a.com] if available.
 +   Easily search for a particular achivement on YouTube. 
-+   Set your avatar as your phone background
 +   Nice 3D carousel view for Android >= 3.0
 
 TODO
 ----
 
 +   Friends
+
+CHANGELOG
+=========
+
+V2.0
+----
++   Fixed navigation, now use standard tabs
++   You can now filter the achivements (earned or not) for a game
++   Fixed large image url
++   Removed Avatar view for now
+
+V1.1
+----
++   Fixed crash when no games
+
+V1.0
+----
++   Initial release
 
 SCREENSHOTS
 ===========
@@ -42,5 +59,6 @@ DEPENDENCIES
 ============
 
 +   [android-query](http://code.google.com/p/android-query/)
-+   [ignition](https://github.com/kaeppler/ignition)
++   [android-async-http](http://loopj.com/android-async-http/)
 +   [actionbarsherlock](http://actionbarsherlock.com/)
++   [google-gson](https://code.google.com/p/google-gson/)

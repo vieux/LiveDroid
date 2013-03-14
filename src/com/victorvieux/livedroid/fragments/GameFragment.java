@@ -9,37 +9,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.GridView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.devspark.appmsg.AppMsg;
+import com.google.gson.Gson;
 import com.victorvieux.livedroid.R;
 import com.victorvieux.livedroid.activities.OnRefreshListener;
 import com.victorvieux.livedroid.adapters.AchAdapter;
 import com.victorvieux.livedroid.api.RestClient;
-import com.victorvieux.livedroid.tools.API_ACHIEVMENTS;
-import com.victorvieux.livedroid.tools.API_ACHIEVMENTS.ACH_TYPE;
+import com.victorvieux.livedroid.api.data.Achievement.ACH_TYPE;
+import com.victorvieux.livedroid.api.endpoints.Achievements;
 import com.victorvieux.livedroid.tools.CachedAsyncHttpResponseHandler;
-import com.victorvieux.livedroid.tools.API_GAMES.GAME_TYPE;
 
 public  class GameFragment extends Fragment implements OnClickListener, OnItemSelectedListener {
 	private AQuery aq = null;
 	AchAdapter mAdapter;
 	
-	public static GameFragment newInstance(int index, String url, String title, String box) {
+	public static GameFragment newInstance(int index, String url, String title, String box_small, String box_large) {
 		GameFragment f = new GameFragment();
 
 		Bundle args = new Bundle();
 		args.putInt("index", index);
 		args.putString("url", url);
 		args.putString("title", title);
-		args.putString("box", box);
+		args.putString("box_small", box_small);
+		args.putString("box_large", box_large);
 		f.setArguments(args);
 
 		return f;
@@ -73,8 +72,11 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 	public String getShownTitle() {
 		return getArguments().getString("title");
 	}
-	public String getShownBox() {
-		return getArguments().getString("box");
+	public String getShownSmallBox() {
+		return getArguments().getString("box_small");
+	}
+	public String getShownLargeBox() {
+		return getArguments().getString("box_large");
 	}
 
 	public String getx360aUrl() 
@@ -86,7 +88,7 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 	public void onActivityCreated(Bundle savedState) {
 		super.onActivityCreated(savedState);
 		aq = new AQuery(getActivity());
-		aq.id(R.id.MainImageViewBox).image(getShownBox());
+		aq.id(R.id.MainImageViewBox).image(getShownSmallBox());
 		getView().findViewById(R.id.MainImageViewBox).setOnClickListener(this);
 
 		onRefresh(false);
@@ -153,36 +155,33 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 				if (!b) {
 					String cache = getCache();
 					if (cache == null) return;
-					try {
-						API_ACHIEVMENTS api_achs = new API_ACHIEVMENTS(cache);
-						PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString("API_LIMIT", api_achs.getApiLimit()).commit();
-						if (api_achs.Success()) {
-							GridView gal = (GridView) GameFragment.this.getView().findViewById(R.id.gridView);
-							mAdapter = new AchAdapter(GameFragment.this.getActivity(), api_achs.getAchs(), GameFragment.this.getShownTitle());
-							mAdapter.filter(getFilter());
-							gal.setAdapter(mAdapter);	
-							getView().findViewById(R.id.spinnerType).setVisibility(View.VISIBLE);
-							((Spinner)getView().findViewById(R.id.spinnerType)).setOnItemSelectedListener(GameFragment.this);
-						}
-					} catch (Exception e) {}
+					Gson gson = new Gson();
+					Achievements achs = gson.fromJson(cache, Achievements.class);
+					PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString("API_LIMIT", achs.API_Limit).commit();
+					if (achs != null && achs.Success) {
+						GridView gal = (GridView) GameFragment.this.getView().findViewById(R.id.gridView);
+						mAdapter = new AchAdapter(GameFragment.this.getActivity(), achs.Achievements, GameFragment.this.getShownTitle());
+						mAdapter.filter(getFilter());
+						gal.setAdapter(mAdapter);	
+						getView().findViewById(R.id.spinnerType).setVisibility(View.VISIBLE);
+						((Spinner)getView().findViewById(R.id.spinnerType)).setOnItemSelectedListener(GameFragment.this);
+					}
 				}
 			}
 			
 			@Override
 			public void onSuccess(String response) {
 				super.onSuccess(response);
-					try {
-						API_ACHIEVMENTS api_achs = new API_ACHIEVMENTS(response);
-						if (api_achs.Success()) {
-							GridView gal = (GridView) GameFragment.this.getView().findViewById(R.id.gridView);
-							mAdapter = new AchAdapter(GameFragment.this.getActivity(), api_achs.getAchs(), GameFragment.this.getShownTitle());
-							mAdapter.filter(getFilter());
-							gal.setAdapter(mAdapter);	
-							getView().findViewById(R.id.spinnerType).setVisibility(View.VISIBLE);
-							((Spinner)getView().findViewById(R.id.spinnerType)).setOnItemSelectedListener(GameFragment.this);
-						}
-					} catch (Exception e) {
-				}
+					Gson gson = new Gson();
+					Achievements achs = gson.fromJson(response, Achievements.class);
+					if (achs != null && achs.Success) {
+						GridView gal = (GridView) GameFragment.this.getView().findViewById(R.id.gridView);
+						mAdapter = new AchAdapter(GameFragment.this.getActivity(), achs.Achievements, GameFragment.this.getShownTitle());
+						mAdapter.filter(getFilter());
+						gal.setAdapter(mAdapter);	
+						getView().findViewById(R.id.spinnerType).setVisibility(View.VISIBLE);
+						((Spinner)getView().findViewById(R.id.spinnerType)).setOnItemSelectedListener(GameFragment.this);
+					}
 			}
 
 			@Override
@@ -205,7 +204,7 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 		switch (arg0.getId()) {
 		case R.id.MainImageViewBox:
 			getView().findViewById(R.id.relativeLayoutBox).setVisibility(View.VISIBLE);
-			aq.id(R.id.imageViewBoxBig).image(getShownBox().replace("small", "large"));			
+			aq.id(R.id.imageViewBoxBig).image(getShownLargeBox());			
 			break;
 		default:
 			getView().findViewById(R.id.relativeLayoutBox).setVisibility(View.GONE);

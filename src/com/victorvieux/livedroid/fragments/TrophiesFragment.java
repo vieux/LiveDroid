@@ -9,19 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.devsmart.android.ui.HorizontalListView;
+import com.victorvieux.livedroid.LiveDroidApp;
 import com.victorvieux.livedroid.R;
 import com.victorvieux.livedroid.activities.GameActivity;
 import com.victorvieux.livedroid.activities.MainActivity;
 import com.victorvieux.livedroid.adapters.GameListAdapter;
-import com.victorvieux.livedroid.data.Game;
-import com.victorvieux.livedroid.tools.API_GAMES.GAME_TYPE;
+import com.victorvieux.livedroid.api.data.Game;
+import com.victorvieux.livedroid.api.data.Game.GAME_TYPE;
 
 public class TrophiesFragment extends SherlockFragment implements OnItemClickListener, OnTapListener {
     private List<Game> completed;
@@ -35,9 +35,12 @@ public class TrophiesFragment extends SherlockFragment implements OnItemClickLis
         completed = new ArrayList<Game>();
         almostCompleted = new ArrayList<Game>();
         moreThan = new ArrayList<Game>();
-        if (((MainActivity)getActivity()).getPlayer().games != null) {
-	        for (Game g : ((MainActivity)getActivity()).getPlayer().games) {
-				int progress = g.Progress_Score * 100 / g.PossibleScore;
+        List<Game> gs = ((LiveDroidApp)  getActivity().getApplication()).getGames();
+
+        if (gs != null) {
+	        for (Game g : gs) {
+	        	if (g.getType() == GAME_TYPE.APP) continue;
+				int progress = g.Progress.Score * 100 / g.PossibleScore;
 				if (progress == 100)
 					completed.add(g);
 				else if (progress >= 90)
@@ -81,18 +84,21 @@ public class TrophiesFragment extends SherlockFragment implements OnItemClickLis
 		if (arg0.equals(getView().findViewById(R.id.horizontalListViewCompleted))) {
 			intent.putExtra("url", completed.get(pos).AchievementInfo);
 			intent.putExtra("title",completed.get(pos).Name);
-			intent.putExtra("box",completed.get(pos).BoxArt_Small);
+			intent.putExtra("box_small",completed.get(pos).BoxArt.Small);
+			intent.putExtra("box_large",completed.get(pos).BoxArt.Large);
 			
 		}
 		if (arg0.equals(getView().findViewById(R.id.horizontalListViewAlmostCompleted))) {
 			intent.putExtra("url", almostCompleted.get(pos).AchievementInfo);
 			intent.putExtra("title",almostCompleted.get(pos).Name);
-			intent.putExtra("box",completed.get(pos).BoxArt_Small);
+			intent.putExtra("box_small",almostCompleted.get(pos).BoxArt.Small);
+			intent.putExtra("box_large",almostCompleted.get(pos).BoxArt.Large);
 		}
 		if (arg0.equals(getView().findViewById(R.id.horizontalListViewMoreThan))) {
 			intent.putExtra("url", moreThan.get(pos).AchievementInfo);
 			intent.putExtra("title",moreThan.get(pos).Name);
-			intent.putExtra("box",completed.get(pos).BoxArt_Small);
+			intent.putExtra("box_small",moreThan.get(pos).BoxArt.Small);
+			intent.putExtra("box_large",moreThan.get(pos).BoxArt.Large);
 		}
 		
         startActivity(intent);	

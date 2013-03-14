@@ -1,5 +1,6 @@
 package com.victorvieux.livedroid.adapters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -12,10 +13,12 @@ import android.widget.ImageView;
 
 import com.androidquery.AQuery;
 import com.victorvieux.livedroid.R;
-import com.victorvieux.livedroid.data.Game;
+import com.victorvieux.livedroid.api.data.Game;
+import com.victorvieux.livedroid.api.data.Game.GAME_TYPE;
 
 public class GameGridAdapter extends BaseAdapter{
 	final List<Game> mGames;
+	final List<Game> mFilteredGames;
 	final Context mContext;
 	final int ht_px;
 	final int wt_px;
@@ -25,23 +28,32 @@ public class GameGridAdapter extends BaseAdapter{
 		aq = new AQuery(context);
 		mContext = context;
 		mGames = games;
+		mFilteredGames = new ArrayList<Game>();
 		ht_px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 120, context.getResources().getDisplayMetrics());
 		wt_px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 85, context.getResources().getDisplayMetrics());
+		filter();
 	}
 
+	public void filter() {
+		if (mGames != null) {
+		for (Game g : mGames)
+			if (g.getType() != GAME_TYPE.APP)
+				mFilteredGames.add(g);
+		}
+	}
 	@Override
 	public int getCount() {
-		return mGames == null ? 0 : mGames.size();
+		return mFilteredGames == null ? 0 : mFilteredGames.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return mGames.get(position);
+		return mFilteredGames.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		return mGames.get(position).ID;
+		return mFilteredGames.get(position).ID;
 	}
 
 	@Override
@@ -54,7 +66,7 @@ public class GameGridAdapter extends BaseAdapter{
             imageView = (ImageView) convertView;
         }
         imageView.setBackgroundResource(R.drawable.box);
-		aq.id(imageView).image(mGames.get(position).BoxArt_Small);
+		aq.id(imageView).image(mFilteredGames.get(position).BoxArt.Small);
 		return imageView;
 	}
 }
