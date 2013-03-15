@@ -22,15 +22,6 @@
         android:layout_alignParentTop="true"
         layout="@layout/include_game_top" />
 
-     <include
-        android:id="@+id/relativeLayoutBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        layout="@layout/relativelayoutbox" 
-        android:visibility="gone"/>
-
        <TextView
          android:id="@+id/textViewLoading"
          android:layout_width="wrap_content"

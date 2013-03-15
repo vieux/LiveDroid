@@ -86,19 +86,21 @@ public class TrophiesFragment extends SherlockFragment implements OnItemClickLis
 			intent.putExtra("title",completed.get(pos).Name);
 			intent.putExtra("box_small",completed.get(pos).BoxArt.Small);
 			intent.putExtra("box_large",completed.get(pos).BoxArt.Large);
-			
+			intent.putExtra("catalog",completed.get(pos).CatalogLink);
 		}
 		if (arg0.equals(getView().findViewById(R.id.horizontalListViewAlmostCompleted))) {
 			intent.putExtra("url", almostCompleted.get(pos).AchievementInfo);
 			intent.putExtra("title",almostCompleted.get(pos).Name);
 			intent.putExtra("box_small",almostCompleted.get(pos).BoxArt.Small);
 			intent.putExtra("box_large",almostCompleted.get(pos).BoxArt.Large);
+			intent.putExtra("catalog",almostCompleted.get(pos).CatalogLink);
 		}
 		if (arg0.equals(getView().findViewById(R.id.horizontalListViewMoreThan))) {
 			intent.putExtra("url", moreThan.get(pos).AchievementInfo);
 			intent.putExtra("title",moreThan.get(pos).Name);
 			intent.putExtra("box_small",moreThan.get(pos).BoxArt.Small);
 			intent.putExtra("box_large",moreThan.get(pos).BoxArt.Large);
+			intent.putExtra("catalog",moreThan.get(pos).CatalogLink);
 		}
 		
         startActivity(intent);	

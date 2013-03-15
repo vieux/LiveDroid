@@ -105,7 +105,7 @@ public class ProfileFragment extends ListFragment implements OnItemSelectedListe
                     getFragmentManager().findFragmentById(R.id.details);
             if (details == null || details.getShownIndex() != index) {
                 // Make new fragment to show this selection.
-                details = GameFragment.newInstance(index, g.AchievementInfo, g.Name, g.BoxArt.Small, g.BoxArt.Large);
+                details = GameFragment.newInstance(index, g.AchievementInfo, g.Name, g.BoxArt.Small, g.BoxArt.Large, g.CatalogLink);
 
                 // Execute a transaction, replacing any existing
                 // fragment with this one inside the frame.
@@ -127,6 +127,7 @@ public class ProfileFragment extends ListFragment implements OnItemSelectedListe
             intent.putExtra("title", g.Name);
             intent.putExtra("box_small", g.BoxArt.Small);
             intent.putExtra("box_large", g.BoxArt.Large);
+            intent.putExtra("catalog", g.CatalogLink);
             startActivity(intent);
         }
     }

@@ -30,6 +30,7 @@ V2.0
 +   Fixed navigation, now use standard tabs
 +   You can now filter the achivements (earned or not) for a game
 +   Fixed large image url
++   Add set a nice background on your device, one for each game.
 +   Removed Avatar view for now
 
 V1.1
@@ -45,6 +46,7 @@ SCREENSHOTS
 
 ![Tablet1](https://raw.github.com/vieux/LiveDroid/master/screenshots/tablet1.png "List mode on tablet")
 ![Phone1](https://raw.github.com/vieux/LiveDroid/master/screenshots/phone1.png "List mode on phone")
+![Phone1-2](https://raw.github.com/vieux/LiveDroid/master/screenshots/phone1-2.png "List mode on phone")
 
 ![Tablet2](https://raw.github.com/vieux/LiveDroid/master/screenshots/tablet2.png "Wall mode on tablet")
 ![Phone2](https://raw.github.com/vieux/LiveDroid/master/screenshots/phone2.png "Wall mode on phone")

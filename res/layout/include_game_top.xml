@@ -4,38 +4,49 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" >
 
- <ImageView
-        android:id="@+id/MainImageViewBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" android:background="@drawable/box" android:layout_margin="5dp"/>
- <TextView
-        android:id="@+id/MainTextViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/MainImageViewBox"
-        android:layout_toRightOf="@+id/MainImageViewBox"
-        android:textColor="@android:color/black" android:layout_marginLeft="5dp" android:textStyle="bold" android:textSize="20dp"/>
+    <ImageView
+        android:id="@+id/imageViewBanner"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/banner" />
 
- <Spinner
+    <Spinner
         android:id="@+id/spinnerType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/sep"
-        android:background="@drawable/custom_spinner" android:entries="@array/typesach" android:visibility="gone" android:layout_marginRight="5dp" android:layout_marginBottom="5dp" android:layout_toRightOf="@id/MainImageViewBox"/>
- 
-    <TextView
+        android:layout_below="@id/imageViewBanner"
+        android:layout_margin="5dp"
+        android:background="@drawable/custom_spinner"
+        android:entries="@array/typesach"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/ButtonWallpaper"
+        android:layout_width="128dp"
+        android:layout_height="36dp"
+        android:layout_toLeftOf="@+id/ButtonGuide"
+        android:layout_above="@id/sep"
+        android:layout_marginBottom="3dp"
+        android:background="@drawable/btn_default_holo_light"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/wallpaper"
+        android:textColor="@color/x360a_green"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+    
+    <Button
         android:id="@+id/ButtonGuide"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:layout_above="@+id/sep"
+        android:layout_width="96dp"
+        android:layout_height="36dp"
+        android:layout_above="@id/sep"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_toRightOf="@+id/spinnerType"
-        android:background="@drawable/block_x360a"
-        android:drawableLeft="@drawable/x360alogosmall"
+        android:layout_marginBottom="3dp"
+        android:layout_marginRight="3dp"
+        android:background="@drawable/btn_default_holo_light"
         android:gravity="center"
         android:padding="5dp"
         android:text="@string/Guide"
@@ -45,8 +56,10 @@
         android:visibility="invisible" />
 
     <View
+        android:id="@+id/sep"
         android:layout_width="fill_parent"
         android:layout_height="2dp"
-        android:background="@color/xbox_green" android:layout_below="@+id/MainImageViewBox" android:id="@+id/sep"/>
+        android:layout_below="@id/spinnerType"
+        android:background="@color/xbox_green" />
 
 </RelativeLayout>

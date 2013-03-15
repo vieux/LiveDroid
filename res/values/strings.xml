@@ -9,7 +9,8 @@
     <string name="carousel">Carousel</string>
     <string name="_carousel">" CAROUSEL"</string>
     <string name="Trophies">Trophies</string>
-    <string name="wallpaper">Set as wallpaper</string>
+    <string name="set_wallpaper">Set as wallpaper</string>
+    <string name="wallpaper">Wallpaper</string>
     <string name="loading">loading...</string>
     <string name="enter">Please enter your GamerTag</string>
     <string name="gamertag">GamerTag</string>

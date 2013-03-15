@@ -89,6 +89,7 @@ public class CarouselActivity extends SherlockActivity {
              intent.putExtra("box_large", mGames.get(id).BoxArt.Large);
              intent.putExtra("url", mGames.get(id).AchievementInfo);
              intent.putExtra("title", mGames.get(id).Name);
+             intent.putExtra("catalog", mGames.get(id).CatalogLink);
              startActivity(intent);	
         }
 

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/x360a"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+ <ImageView
+        android:id="@+id/MainImageViewBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" android:background="@drawable/box" android:layout_marginLeft="5dp" android:layout_marginTop="5dp" android:layout_marginBottom="5dp"/>
+ 
+ <Spinner
+     android:id="@+id/spinnerType"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_above="@+id/sep"
+          android:layout_marginLeft="5dp"
+     
+     android:layout_marginBottom="5dp"
+     android:layout_marginRight="5dp"
+     android:layout_toRightOf="@id/MainImageViewBox"
+     android:background="@drawable/custom_spinner"
+     android:entries="@array/typesach"
+     android:visibility="visible" />
+ 
+ <View android:id="@+id/pad" android:layout_toRightOf="@id/spinnerType" android:layout_width="0dp" android:layout_height="0dp"></View>
+ 
+ <Button
+        android:id="@+id/ButtonWallpaper"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_alignLeft="@+id/ButtonGuide"
+        android:layout_alignRight="@+id/ButtonGuide"
+        android:layout_above="@+id/ButtonGuide"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/btn_default_holo_light"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/wallpaper"
+        android:textColor="@color/x360a_green"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+ 
+    <Button
+        android:id="@+id/ButtonGuide"
+        android:layout_width="96dp"
+        android:layout_height="36dp"
+        android:layout_above="@+id/spinnerType"
+        android:layout_toRightOf="@+id/MainImageViewBox"
+        android:layout_alignRight="@+id/pad"
+        android:background="@drawable/btn_default_holo_light"
+        android:layout_marginBottom="3dp"
+     	android:layout_marginLeft="3dp"
+	    android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/Guide"
+        android:textColor="@color/x360a_green"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@color/xbox_green" android:layout_below="@+id/MainImageViewBox" android:id="@+id/sep"/>
+
+    <ImageView
+        android:id="@+id/imageViewBanner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/sep"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        android:scaleType="fitEnd" />
+
+</RelativeLayout>

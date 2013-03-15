@@ -19,7 +19,7 @@ public class ListFragment extends SherlockFragment implements OnTapListener {
     	                  ft.setTransition(
     	                          FragmentTransaction.TRANSIT_FRAGMENT_FADE);
     	                  ft.commit();
-    	return inflater.inflate(R.layout.list, container, false);
+    	return inflater.inflate(R.layout.fragment_list, container, false);
     }
 
 	@Override

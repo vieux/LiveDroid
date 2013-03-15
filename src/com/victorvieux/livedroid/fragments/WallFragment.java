@@ -46,6 +46,7 @@ public class WallFragment extends SherlockFragment implements OnItemClickListene
 		intent.putExtra("box_large", gs.get(pos).BoxArt.Large);
 		intent.putExtra("url", gs.get(pos).AchievementInfo);
 		intent.putExtra("title", gs.get(pos).Name);
+		intent.putExtra("catalog", gs.get(pos).CatalogLink);
 		startActivity(intent);	
 	}
 

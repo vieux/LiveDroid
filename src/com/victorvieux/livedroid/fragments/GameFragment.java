@@ -1,7 +1,15 @@
 package com.victorvieux.livedroid.fragments;
 
+import java.io.IOException;
+
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
+import android.app.WallpaperManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -24,13 +32,15 @@ import com.victorvieux.livedroid.adapters.AchAdapter;
 import com.victorvieux.livedroid.api.RestClient;
 import com.victorvieux.livedroid.api.data.Achievement.ACH_TYPE;
 import com.victorvieux.livedroid.api.endpoints.Achievements;
+import com.victorvieux.livedroid.api.endpoints.Catalog;
 import com.victorvieux.livedroid.tools.CachedAsyncHttpResponseHandler;
+import com.victorvieux.livedroid.tools.Misc;
 
 public  class GameFragment extends Fragment implements OnClickListener, OnItemSelectedListener {
 	private AQuery aq = null;
 	AchAdapter mAdapter;
 	
-	public static GameFragment newInstance(int index, String url, String title, String box_small, String box_large) {
+	public static GameFragment newInstance(int index, String url, String title, String box_small, String box_large, String catalog) {
 		GameFragment f = new GameFragment();
 
 		Bundle args = new Bundle();
@@ -39,6 +49,7 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 		args.putString("title", title);
 		args.putString("box_small", box_small);
 		args.putString("box_large", box_large);
+		args.putString("catalog", catalog);
 		f.setArguments(args);
 
 		return f;
@@ -78,7 +89,10 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 	public String getShownLargeBox() {
 		return getArguments().getString("box_large");
 	}
-
+	public String getShownCatalogUrl() {
+		return getArguments().getString("catalog");
+	}
+	
 	public String getx360aUrl() 
 	{
 		return "http://www.xbox360achievements.org/game/"+ getShownTitle().replace(' ', '-').replace(":", "").toLowerCase() + "/guide/";
@@ -88,8 +102,10 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 	public void onActivityCreated(Bundle savedState) {
 		super.onActivityCreated(savedState);
 		aq = new AQuery(getActivity());
-		aq.id(R.id.MainImageViewBox).image(getShownSmallBox());
-		getView().findViewById(R.id.MainImageViewBox).setOnClickListener(this);
+		if (getView().findViewById(R.id.MainImageViewBox) != null) {
+			aq.id(R.id.MainImageViewBox).image(getShownSmallBox());
+			getView().findViewById(R.id.MainImageViewBox).setOnClickListener(this);
+		}
 
 		onRefresh(false);
 
@@ -120,8 +136,6 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 			return null;
 
 		View root = inflater.inflate(R.layout.fragment_game, container, false);
-		((TextView) root.findViewById(R.id.MainTextViewTitle)).setText(getShownTitle());
-		root.findViewById(R.id.imageViewBoxBig).setOnClickListener(this);
 		
 		GridView gal = (GridView) root.findViewById(R.id.gridView);
 		gal.setEmptyView(root.findViewById(R.id.textViewLoading));
@@ -158,7 +172,7 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 					Gson gson = new Gson();
 					Achievements achs = gson.fromJson(cache, Achievements.class);
 					PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString("API_LIMIT", achs.API_Limit).commit();
-					if (achs != null && achs.Success) {
+					if (achs != null && achs.Success && GameFragment.this.getView() != null) {
 						GridView gal = (GridView) GameFragment.this.getView().findViewById(R.id.gridView);
 						mAdapter = new AchAdapter(GameFragment.this.getActivity(), achs.Achievements, GameFragment.this.getShownTitle());
 						mAdapter.filter(getFilter());
@@ -174,7 +188,7 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 				super.onSuccess(response);
 					Gson gson = new Gson();
 					Achievements achs = gson.fromJson(response, Achievements.class);
-					if (achs != null && achs.Success) {
+					if (achs != null && achs.Success && GameFragment.this.getView() != null) {
 						GridView gal = (GridView) GameFragment.this.getView().findViewById(R.id.gridView);
 						mAdapter = new AchAdapter(GameFragment.this.getActivity(), achs.Achievements, GameFragment.this.getShownTitle());
 						mAdapter.filter(getFilter());
@@ -194,21 +208,127 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 				if (getActivity() != null && getActivity() instanceof OnRefreshListener)
 					((OnRefreshListener) getActivity()).setRefresh(false);
 			}
-
 		}, getShownUrl());
+		
+		getCatalog();
 	}
+	
+	
+	private void getCatalog() {
+		RestClient.get(getActivity(), new CachedAsyncHttpResponseHandler() {
+			@Override
+			public void onStart() {
+				
+				if (getActivity() instanceof OnRefreshListener)
+					((OnRefreshListener) getActivity()).setRefresh(true);
 
+				String cache = getCache();
+				if (cache == null) return;
+				Gson gson = new Gson();
+				Catalog catalog = gson.fromJson(cache, Catalog.class);
+				if (catalog != null && catalog.success) {
+					if (getView().findViewById(R.id.imageViewBanner) != null)
+						aq.id(R.id.imageViewBanner).image(catalog.data.images.banner);
+					if (getView().findViewById(R.id.ButtonWallpaper) != null){
+						getView().findViewById(R.id.ButtonWallpaper).setTag(catalog.data.images.background);
+						getView().findViewById(R.id.ButtonWallpaper).setOnClickListener(GameFragment.this);
+						getView().findViewById(R.id.ButtonWallpaper).setVisibility(View.VISIBLE);
+					}
+				}
+				
+			}
+			
+			@Override
+			public void onSuccess(String response) {
+				super.onSuccess(response);
+				Gson gson = new Gson();
+				Catalog catalog = gson.fromJson(response, Catalog.class);
+				if (catalog != null && catalog.success) {
+					aq.id(R.id.imageViewBanner).image(catalog.data.images.banner);
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable error) {
+				AppMsg.makeText(getActivity(), R.string.api_error, AppMsg.STYLE_ALERT).show();
+			}
+			
+			@Override
+			public void onFinish() {
+				if (getActivity() != null && getActivity() instanceof OnRefreshListener)
+					((OnRefreshListener) getActivity()).setRefresh(false);
+			}
+		}, getShownCatalogUrl());
+	}
 
 	@Override
 	public void onClick(View arg0) {
+		AlertDialog.Builder builder = new Builder(getActivity());
+		builder.setTitle(getShownTitle());
+		View alert = LayoutInflater.from(getActivity()).inflate(R.layout.alert_picture, null);
+
 		switch (arg0.getId()) {
 		case R.id.MainImageViewBox:
-			getView().findViewById(R.id.relativeLayoutBox).setVisibility(View.VISIBLE);
-			aq.id(R.id.imageViewBoxBig).image(getShownLargeBox());			
+			aq.id(alert.findViewById(R.id.imageViewBoxBig)).image(getShownLargeBox());
+			builder.setView(alert);
+			builder.setNeutralButton(android.R.string.cancel, new DialogInterface.OnClickListener() {				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			});
+			builder.show();
+			break;
+			
+		case R.id.ButtonWallpaper:
+			final String url = (String)arg0.getTag();
+			aq.id(alert.findViewById(R.id.imageViewBoxBig)).image(url);
+			builder.setView(alert);
+			builder.setPositiveButton(R.string.set_wallpaper, new DialogInterface.OnClickListener() {				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					new getBackGroundTask().execute(url);
+					}
+			});
+			builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			});
+			builder.show();
 			break;
 		default:
-			getView().findViewById(R.id.relativeLayoutBox).setVisibility(View.GONE);
 			break;
 		}
 	}
+	
+	
+	class getBackGroundTask extends AsyncTask<String, Void, Void> {
+	    ProgressDialog progressDialog;
+	
+	    @Override
+	    protected void onPreExecute() {
+	      progressDialog = new ProgressDialog(getActivity());
+	      progressDialog.setIndeterminate(true);
+	      progressDialog.setMessage(getString(R.string.loading));
+	      progressDialog.setCancelable(false);
+	      progressDialog.show();
+	    }
+	    
+	    @Override
+	    protected Void doInBackground(String... params) {
+	      try {
+	        WallpaperManager.getInstance(getActivity()).setBitmap(Misc.loadBitmap(params[0]));
+	      } catch (IOException e) {
+	      }
+	      return null;
+	    }
+	    
+	    @Override
+	    protected void onPostExecute(Void result) {
+	      progressDialog.dismiss();
+	    }
+	    
+	  }
 }

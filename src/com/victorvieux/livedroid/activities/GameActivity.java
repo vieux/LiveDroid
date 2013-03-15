@@ -24,8 +24,8 @@ public class GameActivity extends SherlockFragmentActivity implements OnRefreshL
         	finish();
             return;
         }
-
         if (savedInstanceState == null) {
+        	setTitle(getIntent().getStringExtra("title"));
             GameFragment game = new GameFragment();
             game.setArguments(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction().add(android.R.id.content, game).commit();
