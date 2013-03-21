@@ -38,5 +38,6 @@
     <string name="credits">Crédits</string>
    	<string name="wallpaper_updated">Wallpaper mis à jour</string>
    	<string name="wallpaper_error">Erreur lors de la mise à jour du Wallpaper</string>
-   	
+    <string name="hidden">Succes masqué</string>
+    <string name="hidden_desc">Ce succes est caché</string>   	
 </resources>

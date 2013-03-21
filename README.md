@@ -30,6 +30,7 @@ V2.0
 +   Fixed navigation, now use standard tabs
 +   You can now filter the achivements (earned or not) for a game
 +   Fixed large image url
++   Fixed hidden achievements
 +   Add set a nice background on your device, one for each game.
 +   Removed Avatar view for now
 

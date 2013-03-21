@@ -46,5 +46,7 @@
     	<string name="search_hint">Search game</string>
     	<string name="wallpaper_updated">Wallpaper updated</string>
     	<string name="wallpaper_error">Error updating the Wallpaper</string>
-    			
+    	<string name="hidden">Achievement hidden</string>
+    	<string name="hidden_desc">This achievement is hidden</string>
+    					
 </resources>

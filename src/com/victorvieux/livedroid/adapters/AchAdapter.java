@@ -100,9 +100,10 @@ public class AchAdapter extends BaseAdapter{
 		final Achievement a = mFilteredAchs.get(position);
 		
 		aq.id(vh.imageViewTile).image(a.TileUrl);
-		vh.textViewTitle.setText(a.Name);
+		vh.textViewTitle.setText(a.Name.length() == 0 ? vh.textViewDesc.getContext().getString(R.string.hidden) : a.Name);
 		vh.textViewScore.setText(""+a.Score);
-		vh.textViewDesc.setText(a.Description);
+		vh.textViewDesc.setText(a.Name.length() == 0 ? vh.textViewDesc.getContext().getString(R.string.hidden_desc) : a.Description);
+		vh.imageViewVideo.setVisibility(a.Name.length() == 0 ? View.GONE : View.VISIBLE);
 		vh.imageViewVideo.setOnClickListener(new OnClickListener() {
 			
 			@Override
