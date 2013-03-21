@@ -7,7 +7,6 @@
     <string name="List">List</string>
     <string name="Avatar">Avatar</string>
     <string name="carousel">Carousel</string>
-    <string name="_carousel">" CAROUSEL"</string>
     <string name="Trophies">Trophies</string>
     <string name="set_wallpaper">Set as wallpaper</string>
     <string name="wallpaper">Wallpaper</string>
@@ -22,7 +21,7 @@
 	<string name="morethan">More than 75%</string>  
 	<string name="xboxapititle">This app uses http://xboxapi.com/</string>
 	<string name="xboxapisubtitle">Thanks to @djekl</string>
-	<string name="fork">Fork me on Github</string>
+	<string name="fork">Fork LiveDroid on Github</string>
 	<string name="Guide">Guide</string>
 	<string-array name="types">
         <item>All</item>
@@ -39,5 +38,10 @@
         <string name="refresh">Refresh</string>
         <string name="restart">Restarting application</string>
         <string name="api_error">Error, please try again later...</string>
+        <string name="credits">Credits</string>
+        <string name="credits_oss_heading">LiveDroid uses the following open-source software:</string>
+    	<string name="credits_oss_items"><a href="http://code.google.com/p/android-query/">android-query</a>\nCopyright 2012 Peter Liu.\n<a href="http://loopj.com/android-async-http/">android-async-http</a>\nCopyright 2012 James Smith.\n<a href="http://actionbarsherlock.com/">ActionBarSherlock</a>\nCopyright 2012 Jake Wharton.\n<a href="https://code.google.com/p/google-gson/">Google GSON</a>\nCopyright 2008-2011 Google Inc.\n</string>
+    	<string name="credits_art_items">This app uses <a href="http://xboxapi.com/">http://xboxapi.com/</a>.\nThanks to <a href="http://twitter.com/djekl">@djekl</a>.</string>
+    	<string name="credits_app_copyright">Copyright 2013, Victor Vieux.</string>
         
 </resources>

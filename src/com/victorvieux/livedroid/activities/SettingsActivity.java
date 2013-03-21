@@ -15,6 +15,9 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceManager;
+import android.text.method.LinkMovementMethod;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
@@ -43,8 +46,8 @@ public class SettingsActivity extends SherlockPreferenceActivity implements OnPr
 		
 		
 		findPreference("license").setOnPreferenceClickListener(this);
-		findPreference("xboxapi").setOnPreferenceClickListener(this);
 		findPreference("github").setOnPreferenceClickListener(this);
+		findPreference("credits").setOnPreferenceClickListener(this);
 		findPreference("api_limit").setSummary(PreferenceManager.getDefaultSharedPreferences(this).getString("API_LIMIT", ""));
 	}
 
@@ -83,10 +86,28 @@ public class SettingsActivity extends SherlockPreferenceActivity implements OnPr
 			});
 			b.create().show();
 			return true;
-		} else if (preference.getKey().equals("xboxapi")) {
-			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://xboxapi.com")));
 		} else if (preference.getKey().equals("github")) {
 			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/vieux/LiveDroid")));
+		}else if (preference.getKey().equals("credits")) {
+			final View layout = View.inflate(SettingsActivity.this, R.layout.credits, null);
+
+            TextView ossTextView = (TextView) layout.findViewById(R.id.credits_oss_items);
+            ossTextView.setMovementMethod(LinkMovementMethod.getInstance());
+
+            TextView artTextView = (TextView) layout.findViewById(R.id.credits_art_items);
+            artTextView.setMovementMethod(LinkMovementMethod.getInstance());
+
+            
+            AlertDialog.Builder builder = new AlertDialog.Builder(
+                    SettingsActivity.this);
+            builder.setIcon(0);
+            builder.setNegativeButton(android.R.string.ok, null);
+            builder.setView(layout);
+            builder.setTitle(R.string.credits);
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+            return true;
 		}
 		return false;
 	}

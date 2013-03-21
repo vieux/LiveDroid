@@ -64,3 +64,10 @@ DEPENDENCIES
 +   [android-async-http](http://loopj.com/android-async-http/)
 +   [actionbarsherlock](http://actionbarsherlock.com/)
 +   [google-gson](https://code.google.com/p/google-gson/)
+
+LICENSE
+=======
+
+LiveDroid is released under the Android-friendly Apache License, Version 2.0. Read the full license here:
+
+[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)

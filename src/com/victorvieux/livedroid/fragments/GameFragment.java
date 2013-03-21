@@ -247,6 +247,13 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 				Catalog catalog = gson.fromJson(response, Catalog.class);
 				if (catalog != null && catalog.success) {
 					aq.id(R.id.imageViewBanner).image(catalog.data.images.banner);
+					if (getView().findViewById(R.id.MainImageViewBox) == null)
+						getView().findViewById(R.id.imageViewBanner).setOnClickListener(GameFragment.this);
+				}
+				if (getView().findViewById(R.id.ButtonWallpaper) != null){
+					getView().findViewById(R.id.ButtonWallpaper).setTag(catalog.data.images.background);
+					getView().findViewById(R.id.ButtonWallpaper).setOnClickListener(GameFragment.this);
+					getView().findViewById(R.id.ButtonWallpaper).setVisibility(View.VISIBLE);
 				}
 			}
 

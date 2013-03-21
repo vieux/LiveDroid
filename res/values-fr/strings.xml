@@ -5,7 +5,6 @@
     <string name="List">Liste</string>
     <string name="Avatar">Avatar</string>
     <string name="carousel">Carrousel</string>
-    <string name="_carousel">" CARROUSEL"</string>
     <string name="Trophies">Trophées</string>
     <string name="set_wallpaper">Mettre en fond d\'écran</string>
     <string name="wallpaper">Fond d\'écran</string>
@@ -20,7 +19,7 @@
 	<string name="morethan">Plus de 75%</string>  
 	<string name="xboxapititle">Cette app utilise http://xboxapi.com/</string>
 	<string name="xboxapisubtitle">Merci à @djekl</string>
-	<string name="fork">Fork me on Github</string>
+	<string name="fork">Forker sur Github</string>
 	<string name="Guide">Guide</string>
 	<string-array name="types">
         <item>Tous</item>
@@ -36,5 +35,6 @@
     <string name="refresh">rafraichir</string>
     <string name="restart">Redémarrage de l\'application</string>
    	<string name="api_error">Erreur, merci de réessayer plus tard...</string>
-    		
+    <string name="credits">Crédits</string>
+   	
 </resources>
