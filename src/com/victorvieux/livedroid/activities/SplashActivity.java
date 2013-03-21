@@ -58,22 +58,24 @@ public class SplashActivity extends Activity {
 			public void onStart() {
 				String cache = getCache();
 				if (cache != null) {
-					Gson gson = new Gson();
-					Games games = gson.fromJson(cache, Games.class);
-					if (games != null && games.Success) {
-						Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-						intent.putExtra("root", games);
-						SplashActivity.this.startActivity(intent);
-					}
-					else
-						((ViewSwitcher)SplashActivity.this.findViewById(R.id.viewSwitcherLogin)).showPrevious();
-					LoadingAnimation.stop(findViewById(R.id.imageViewLogo));
+					onWork(true, cache);
 				}
 			}
 			@Override
 			public void onSuccess(String response) {
 				super.onSuccess(response);
 				if (hadCache()) return;
+				onWork(false, response);
+			}
+
+			@Override
+			public void onFailure(Throwable error) {
+				
+				LoadingAnimation.stop(findViewById(R.id.imageViewLogo));
+				((ViewSwitcher)SplashActivity.this.findViewById(R.id.viewSwitcherLogin)).showPrevious();
+			}
+			
+			public void onWork(boolean cached, String response) {
 				Gson gson = new Gson();
 				Games games = gson.fromJson(response, Games.class);
 				if (games != null && games.Success) {
@@ -84,13 +86,6 @@ public class SplashActivity extends Activity {
 				else
 					((ViewSwitcher)SplashActivity.this.findViewById(R.id.viewSwitcherLogin)).showPrevious();
 				LoadingAnimation.stop(findViewById(R.id.imageViewLogo));
-			}
-
-			@Override
-			public void onFailure(Throwable error) {
-				
-				LoadingAnimation.stop(findViewById(R.id.imageViewLogo));
-				((ViewSwitcher)SplashActivity.this.findViewById(R.id.viewSwitcherLogin)).showPrevious();
 			}
 
 		}, gamertag);

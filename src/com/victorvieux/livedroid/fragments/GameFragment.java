@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.GridView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.devspark.appmsg.AppMsg;
@@ -137,7 +138,7 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 		View root = inflater.inflate(R.layout.fragment_game, container, false);
 		
 		GridView gal = (GridView) root.findViewById(R.id.gridView);
-		gal.setEmptyView(root.findViewById(R.id.textViewLoading));
+		gal.setEmptyView(root.findViewById(R.id.loading_ref));
 		return root;
 	}
 
@@ -168,33 +169,14 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 				if (!b) {
 					String cache = getCache();
 					if (cache == null) return;
-					Gson gson = new Gson();
-					Achievements achs = gson.fromJson(cache, Achievements.class);
-					PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString("API_LIMIT", achs.API_Limit).commit();
-					if (achs != null && achs.Success && GameFragment.this.getView() != null) {
-						GridView gal = (GridView) GameFragment.this.getView().findViewById(R.id.gridView);
-						mAdapter = new AchAdapter(GameFragment.this.getActivity(), achs.Achievements, GameFragment.this.getShownTitle());
-						mAdapter.filter(getFilter());
-						gal.setAdapter(mAdapter);	
-						getView().findViewById(R.id.spinnerType).setVisibility(View.VISIBLE);
-						((Spinner)getView().findViewById(R.id.spinnerType)).setOnItemSelectedListener(GameFragment.this);
-					}
+					onWork(true, cache);
 				}
 			}
 			
 			@Override
 			public void onSuccess(String response) {
 				super.onSuccess(response);
-					Gson gson = new Gson();
-					Achievements achs = gson.fromJson(response, Achievements.class);
-					if (achs != null && achs.Success && GameFragment.this.getView() != null) {
-						GridView gal = (GridView) GameFragment.this.getView().findViewById(R.id.gridView);
-						mAdapter = new AchAdapter(GameFragment.this.getActivity(), achs.Achievements, GameFragment.this.getShownTitle());
-						mAdapter.filter(getFilter());
-						gal.setAdapter(mAdapter);	
-						getView().findViewById(R.id.spinnerType).setVisibility(View.VISIBLE);
-						((Spinner)getView().findViewById(R.id.spinnerType)).setOnItemSelectedListener(GameFragment.this);
-					}
+					onWork(false, response);
 			}
 
 			@Override
@@ -206,6 +188,21 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 			public void onFinish() {
 				if (getActivity() != null && getActivity() instanceof OnRefreshListener)
 					((OnRefreshListener) getActivity()).setRefresh(false);
+			}
+			
+			public void onWork(boolean cached, String response) {
+				Gson gson = new Gson();
+				Achievements achs = gson.fromJson(response, Achievements.class);
+				if (getActivity() != null)
+					PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString("API_LIMIT", achs.API_Limit).commit();
+				if (achs != null && achs.Success && GameFragment.this.getView() != null) {
+					GridView gal = (GridView) GameFragment.this.getView().findViewById(R.id.gridView);
+					mAdapter = new AchAdapter(GameFragment.this.getActivity(), achs.Achievements, GameFragment.this.getShownTitle());
+					mAdapter.filter(getFilter());
+					gal.setAdapter(mAdapter);	
+					getView().findViewById(R.id.spinnerType).setVisibility(View.VISIBLE);
+					((Spinner)getView().findViewById(R.id.spinnerType)).setOnItemSelectedListener(GameFragment.this);
+				}
 			}
 		}, getShownUrl());
 		
@@ -331,6 +328,7 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 	      try {
 	        WallpaperManager.getInstance(getActivity()).setBitmap(Misc.loadBitmap(params[0]));
 	      } catch (IOException e) {
+		      AppMsg.makeText(getActivity(), R.string.wallpaper_error, AppMsg.STYLE_ALERT).show();
 	      }
 	      return null;
 	    }
@@ -338,6 +336,7 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 	    @Override
 	    protected void onPostExecute(Void result) {
 	      progressDialog.dismiss();
+	      AppMsg.makeText(getActivity(), R.string.wallpaper_updated, AppMsg.STYLE_INFO).show();
 	    }
 	    
 	  }

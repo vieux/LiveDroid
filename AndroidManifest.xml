@@ -26,7 +26,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MainActivity"></activity>
+        <activity android:name=".activities.MainActivity">
+            <intent-filter>
+            	<action android:name="android.intent.action.SEARCH" />
+        	</intent-filter>
+        	<meta-data android:name="android.app.searchable"
+                   android:resource="@xml/searchable"/>
+    	</activity>
         <activity android:noHistory="true" android:label="" android:name=".activities.GameActivity"></activity>
         <activity android:noHistory="true" android:label="@string/settings" android:name=".activities.SettingsActivity" android:theme="@style/CustomThemeNoBg"></activity>
         <activity android:noHistory="true" android:label="@string/carousel" android:name=".activities.CarouselActivity"></activity>

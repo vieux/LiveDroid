@@ -36,5 +36,7 @@
     <string name="restart">Redémarrage de l\'application</string>
    	<string name="api_error">Erreur, merci de réessayer plus tard...</string>
     <string name="credits">Crédits</string>
+   	<string name="wallpaper_updated">Wallpaper mis à jour</string>
+   	<string name="wallpaper_error">Erreur lors de la mise à jour du Wallpaper</string>
    	
 </resources>

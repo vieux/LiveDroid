@@ -1,5 +1,6 @@
 package com.victorvieux.livedroid.activities;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -56,6 +57,19 @@ public class MainActivity extends SherlockFragmentActivity implements OnRefreshL
     
     
     @Override
+	protected void onNewIntent(Intent intent) {
+	    setIntent(intent);
+	    handleIntent(intent);
+	}
+
+	private void handleIntent(Intent intent) {
+	    if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+	      String query = intent.getStringExtra(SearchManager.QUERY);	      
+	    }
+	}
+    
+    
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.menu, menu);
@@ -77,6 +91,8 @@ public class MainActivity extends SherlockFragmentActivity implements OnRefreshL
         	case R.id.settings:
         		startActivity(new Intent(this, SettingsActivity.class));
         		return true;
+        	//case R.id.search:
+	         //     onSearchRequested();  
             default:
                 return super.onOptionsItemSelected(item);
         }

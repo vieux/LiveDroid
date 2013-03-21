@@ -41,4 +41,6 @@ public class CachedAsyncHttpResponseHandler extends AsyncHttpResponseHandler{
 		e.putLong(mUrl + "_millitimestamp", System.currentTimeMillis());
 		e.commit();
 	}
+	
+	
 }

@@ -22,13 +22,13 @@
         android:layout_alignParentTop="true"
         layout="@layout/include_game_top" />
 
-      <TextView
-          android:id="@+id/textViewLoading"
+      <include
+          android:id="@+id/loading_ref"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_alignTop="@+id/gridView"
           android:layout_centerHorizontal="true"
           android:layout_marginTop="30dp"
-          android:text="@string/loading" />
+        layout="@layout/include_loading" />
 
 </RelativeLayout>

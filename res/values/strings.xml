@@ -43,5 +43,8 @@
     	<string name="credits_oss_items"><a href="http://code.google.com/p/android-query/">android-query</a>\nCopyright 2012 Peter Liu.\n<a href="http://loopj.com/android-async-http/">android-async-http</a>\nCopyright 2012 James Smith.\n<a href="http://actionbarsherlock.com/">ActionBarSherlock</a>\nCopyright 2012 Jake Wharton.\n<a href="https://code.google.com/p/google-gson/">Google GSON</a>\nCopyright 2008-2011 Google Inc.\n</string>
     	<string name="credits_art_items">This app uses <a href="http://xboxapi.com/">http://xboxapi.com/</a>.\nThanks to <a href="http://twitter.com/djekl">@djekl</a>.</string>
     	<string name="credits_app_copyright">Copyright 2013, Victor Vieux.</string>
-        
+    	<string name="search_hint">Search game</string>
+    	<string name="wallpaper_updated">Wallpaper updated</string>
+    	<string name="wallpaper_error">Error updating the Wallpaper</string>
+    			
 </resources>
