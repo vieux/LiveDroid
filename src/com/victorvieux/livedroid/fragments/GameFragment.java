@@ -21,7 +21,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.GridView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.devspark.appmsg.AppMsg;
@@ -227,8 +226,11 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 				Gson gson = new Gson();
 				Catalog catalog = gson.fromJson(cache, Catalog.class);
 				if (catalog != null && catalog.success) {
-					if (getView().findViewById(R.id.imageViewBanner) != null)
+					if (getView().findViewById(R.id.imageViewBanner) != null) {
 						aq.id(R.id.imageViewBanner).image(catalog.data.images.banner);
+						if (getView().findViewById(R.id.MainImageViewBox) == null)
+							getView().findViewById(R.id.imageViewBanner).setOnClickListener(GameFragment.this);
+					}
 					if (getView().findViewById(R.id.ButtonWallpaper) != null){
 						getView().findViewById(R.id.ButtonWallpaper).setTag(catalog.data.images.background);
 						getView().findViewById(R.id.ButtonWallpaper).setOnClickListener(GameFragment.this);
@@ -269,6 +271,7 @@ public  class GameFragment extends Fragment implements OnClickListener, OnItemSe
 
 		switch (arg0.getId()) {
 		case R.id.MainImageViewBox:
+		case R.id.imageViewBanner:
 			aq.id(alert.findViewById(R.id.imageViewBoxBig)).image(getShownLargeBox());
 			builder.setView(alert);
 			builder.setNeutralButton(android.R.string.cancel, new DialogInterface.OnClickListener() {				

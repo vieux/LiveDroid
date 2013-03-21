@@ -9,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/banner" />
+        android:scaleType="centerCrop" />
 
     <Spinner
         android:id="@+id/spinnerType"

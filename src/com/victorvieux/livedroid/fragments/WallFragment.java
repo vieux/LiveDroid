@@ -15,10 +15,8 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.victorvieux.livedroid.LiveDroidApp;
 import com.victorvieux.livedroid.R;
 import com.victorvieux.livedroid.activities.GameActivity;
-import com.victorvieux.livedroid.activities.MainActivity;
 import com.victorvieux.livedroid.adapters.GameGridAdapter;
 import com.victorvieux.livedroid.api.data.Game;
-import com.victorvieux.livedroid.api.data.Player;
 
 public class WallFragment extends SherlockFragment implements OnItemClickListener, OnTapListener{
 

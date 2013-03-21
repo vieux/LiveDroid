@@ -1,15 +1,14 @@
 package com.victorvieux.livedroid.activities;
 
-import java.util.Arrays;
-import java.util.List;
-
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
@@ -19,25 +18,15 @@ import com.victorvieux.livedroid.R;
 import com.victorvieux.livedroid.api.RestClient;
 import com.victorvieux.livedroid.api.endpoints.Games;
 import com.victorvieux.livedroid.tools.CachedAsyncHttpResponseHandler;
-import com.victorvieux.livedroid.tools.LiveDroidFountain;
-import com.victorvieux.livedroid.tools.Misc;
+import com.victorvieux.livedroid.tools.LoadingAnimation;
 
 public class SplashActivity extends Activity {
-	List<Integer> ach_ids = Arrays.asList(new Integer[] {	R.drawable.ach1,R.drawable.ach2,R.drawable.ach3,R.drawable.ach0,
-			R.drawable.ach5,R.drawable.ach6,R.drawable.ach7,R.drawable.ach8,
-			R.drawable.ach9,R.drawable.ach10,R.drawable.ach11,R.drawable.ach12,
-			R.drawable.ach13,R.drawable.ach0, R.drawable.ach14,R.drawable.ach15});
-	LiveDroidFountain mLiveDroidFountain;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
 		((TextView)findViewById(R.id.textViewTitle)).setTypeface(Typeface.createFromAsset(getAssets(), "X360.ttf"));
-
-
-		mLiveDroidFountain = new LiveDroidFountain(this);
-		mLiveDroidFountain.initDrawables(ach_ids, Misc.isTablet(this) ? ach_ids.size() : ach_ids.size() / 2);
 
 		String gamertag = PreferenceManager.getDefaultSharedPreferences(this).getString("gamertag", null);
 		if (gamertag != null && gamertag.trim().compareTo("") != 0) {
@@ -50,6 +39,9 @@ public class SplashActivity extends Activity {
 			public void onClick(View v) {
 				String gamertag = ((EditText) findViewById(R.id.editTextGamerTag)).getEditableText().toString().trim();
 				if (gamertag != null && gamertag.length() > 1) {
+					InputMethodManager imm = (InputMethodManager)getSystemService(
+						      Context.INPUT_METHOD_SERVICE);
+						imm.hideSoftInputFromWindow(((EditText) findViewById(R.id.editTextGamerTag)).getWindowToken(), 0);
 					getGames(gamertag.trim());
 				}
 			}
@@ -59,7 +51,8 @@ public class SplashActivity extends Activity {
 
 	private void getGames(String gamertag) {
 		((ViewSwitcher)findViewById(R.id.viewSwitcherLogin)).showNext();
-		mLiveDroidFountain.animate(true);
+		LoadingAnimation.start(findViewById(R.id.imageViewLogo));
+		
 		RestClient.getGames(this, new CachedAsyncHttpResponseHandler() {
 			@Override
 			public void onStart() {
@@ -74,7 +67,7 @@ public class SplashActivity extends Activity {
 					}
 					else
 						((ViewSwitcher)SplashActivity.this.findViewById(R.id.viewSwitcherLogin)).showPrevious();
-					SplashActivity.this.mLiveDroidFountain.stop();
+					LoadingAnimation.stop(findViewById(R.id.imageViewLogo));
 				}
 			}
 			@Override
@@ -90,12 +83,13 @@ public class SplashActivity extends Activity {
 				}
 				else
 					((ViewSwitcher)SplashActivity.this.findViewById(R.id.viewSwitcherLogin)).showPrevious();
-				SplashActivity.this.mLiveDroidFountain.stop();
+				LoadingAnimation.stop(findViewById(R.id.imageViewLogo));
 			}
 
 			@Override
 			public void onFailure(Throwable error) {
-				SplashActivity.this.mLiveDroidFountain.stop();
+				
+				LoadingAnimation.stop(findViewById(R.id.imageViewLogo));
 				((ViewSwitcher)SplashActivity.this.findViewById(R.id.viewSwitcherLogin)).showPrevious();
 			}
 

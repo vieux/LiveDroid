@@ -11,7 +11,7 @@ public class CachedAsyncHttpResponseHandler extends AsyncHttpResponseHandler{
 	private String mUrl = null;
 	private boolean mHadCache = false;
 	
-	final static long CACHE_PERIOD = 1000 * 60 * 60 * 1; //1 hour
+	final static long CACHE_PERIOD = 0;// 1000 * 60 * 60 * 1; //1 hour
 	
 	public void setContext(Context context) {
 		mContext = context;

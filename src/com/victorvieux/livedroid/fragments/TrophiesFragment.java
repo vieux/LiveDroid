@@ -18,7 +18,6 @@ import com.devsmart.android.ui.HorizontalListView;
 import com.victorvieux.livedroid.LiveDroidApp;
 import com.victorvieux.livedroid.R;
 import com.victorvieux.livedroid.activities.GameActivity;
-import com.victorvieux.livedroid.activities.MainActivity;
 import com.victorvieux.livedroid.adapters.GameListAdapter;
 import com.victorvieux.livedroid.api.data.Game;
 import com.victorvieux.livedroid.api.data.Game.GAME_TYPE;
