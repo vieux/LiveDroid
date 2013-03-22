@@ -4,19 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.androidquery.AQuery;
+import com.victorvieux.livedroid.LiveDroidApp;
 import com.victorvieux.livedroid.R;
+import com.victorvieux.livedroid.activities.GameActivity;
 import com.victorvieux.livedroid.api.data.Game;
 import com.victorvieux.livedroid.api.data.Game.GAME_TYPE;
 
-public class GameGridAdapter extends BaseAdapter{
+public class GameGridAdapter extends BaseAdapter implements OnItemClickListener{
 	final List<Game> mGames;
 	final List<Game> mFilteredGames;
 	final Context mContext;
@@ -68,5 +73,19 @@ public class GameGridAdapter extends BaseAdapter{
         imageView.setBackgroundResource(R.drawable.box);
 		aq.id(imageView).image(mFilteredGames.get(position).BoxArt.Small);
 		return imageView;
+	}
+	
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long arg3) {
+		Intent intent = new Intent();
+		intent.setClass(mContext, GameActivity.class);
+		intent.putExtra("index", pos);
+		intent.putExtra("forced", true);
+		intent.putExtra("box_small", mFilteredGames.get(pos).BoxArt.Small);
+		intent.putExtra("box_large", mFilteredGames.get(pos).BoxArt.Large);
+		intent.putExtra("url", mFilteredGames.get(pos).AchievementInfo);
+		intent.putExtra("title", mFilteredGames.get(pos).Name);
+		intent.putExtra("catalog", mFilteredGames.get(pos).CatalogLink);
+		mContext.startActivity(intent);	
 	}
 }

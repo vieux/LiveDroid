@@ -18,36 +18,19 @@ import com.victorvieux.livedroid.activities.GameActivity;
 import com.victorvieux.livedroid.adapters.GameGridAdapter;
 import com.victorvieux.livedroid.api.data.Game;
 
-public class WallFragment extends SherlockFragment implements OnItemClickListener, OnTapListener{
+public class WallFragment extends SherlockFragment implements OnTapListener{
 
 
 	public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View root = inflater.inflate(R.layout.fragment_wall, container, false);
 
 		((GridView) root.findViewById(R.id.gridView)).setEmptyView(root.findViewById(android.R.id.empty));
-		((GridView) root.findViewById(R.id.gridView)).setAdapter(new GameGridAdapter(getActivity(), ((LiveDroidApp)  getActivity().getApplication()).getGames()));
-		((GridView) root.findViewById(R.id.gridView)).setOnItemClickListener(this);
+		GameGridAdapter adapter = new GameGridAdapter(getActivity(), ((LiveDroidApp)  getActivity().getApplication()).getGames());
+		((GridView) root.findViewById(R.id.gridView)).setAdapter(adapter);
+		((GridView) root.findViewById(R.id.gridView)).setOnItemClickListener(adapter);
 	
 		return root;
 	}
-
-
-
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long arg3) {
-        List<Game> gs = ((LiveDroidApp)  getActivity().getApplication()).getGames();
-		Intent intent = new Intent();
-		intent.setClass(getActivity(), GameActivity.class);
-		intent.putExtra("index", pos);
-		intent.putExtra("forced", true);
-		intent.putExtra("box_small", gs.get(pos).BoxArt.Small);
-		intent.putExtra("box_large", gs.get(pos).BoxArt.Large);
-		intent.putExtra("url", gs.get(pos).AchievementInfo);
-		intent.putExtra("title", gs.get(pos).Name);
-		intent.putExtra("catalog", gs.get(pos).CatalogLink);
-		startActivity(intent);	
-	}
-
 
 
 	@Override

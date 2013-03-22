@@ -15,6 +15,7 @@ DONE
 +   Display all your games (Xbox Retails, Xbox Arcade and Windows games)
 +   Link to an achivements guide from [x360a.com](x360a.com] if available.
 +   Easily search for a particular achivement on YouTube. 
++   Set a nice wallpaper for each game
 +   Nice 3D carousel view for Android >= 3.0
 
 TODO
